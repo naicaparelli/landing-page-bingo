@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Bingo Online | Jogos Exclusivos Dr. Bingo</title>
+<meta name="description" content="Conheça os jogos de bingo exclusivos da Dr. Bingo. Crie sua conta e explore os títulos disponíveis.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&amp;family=Ubuntu:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</helmet>
+
+<div class="page" style="padding-bottom:{{ pagePadBottom }}">
+
+<a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+<header class="site-header" style="box-shadow:{{ hdrShadow }}">
+  <div class="site-header__row">
+    <a href="#topo" aria-label="Dr. Bingo, início" class="site-header__brand"><img src="assets/logo.png" alt="Dr. Bingo" width="134" height="23" class="brand-logo"></a>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Navegação principal" class="site-nav">
+        <a href="#jogos" class="site-nav__link">Jogos de bingo</a>
+        <a href="#como-comecar" class="site-nav__link">Como começar</a>
+        <a href="#faq" class="site-nav__link">Perguntas frequentes</a>
+      </nav>
+      <div class="site-header__cta-group">
+        <a href="{{ links.login }}" data-cta="header_entrar" onClick="{{ onCta }}" class="header-login-link">Entrar</a>
+        <a href="{{ links.signup }}" data-cta="header_criar_conta" onClick="{{ onCta }}" class="btn-primary btn-primary--sm">Criar minha conta</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <div class="site-header__cta-group--mobile">
+        <a href="{{ links.signup }}" data-cta="header_criar_conta_mobile" onClick="{{ onCta }}" class="btn-primary btn-primary--mobile">Criar conta</a>
+        <button type="button" aria-expanded="{{ menuOpenStr }}" aria-controls="menu-mobile" aria-label="Abrir menu" onClick="{{ toggleMenu }}" class="burger-btn">
+          <span class="burger-bar"></span>
+          <span class="burger-bar burger-bar--accent"></span>
+          <span class="burger-bar"></span>
+        </button>
+      </div>
+    </sc-if>
+  </div>
+  <sc-if value="{{ showMobileMenu }}" hint-placeholder-val="{{ false }}">
+    <nav id="menu-mobile" aria-label="Menu" class="mobile-nav">
+      <a href="#jogos" onClick="{{ closeMenu }}" class="mobile-nav__link">Jogos de bingo</a>
+      <a href="#como-comecar" onClick="{{ closeMenu }}" class="mobile-nav__link">Como começar</a>
+      <a href="#faq" onClick="{{ closeMenu }}" class="mobile-nav__link">Perguntas frequentes</a>
+      <a href="{{ links.login }}" data-cta="menu_entrar" onClick="{{ onCta }}" class="mobile-nav__login">Entrar</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main id="conteudo">
+
+<section id="topo" data-screen-label="Hero" aria-labelledby="h1" class="hero">
+  <div aria-hidden="true" class="hero__grid-overlay"></div>
+  <div role="img" aria-label="Personagem do Dr. Bingo comemorando com uma cartela de bingo cercado de bolas numeradas" class="hero__keyart">
+  </div>
+  <div aria-hidden="true" class="hero__ball hero__ball--a"><span class="hero__ball-number hero__ball-number--a">7</span></div>
+  <div aria-hidden="true" class="hero__ball hero__ball--b"><span class="hero__ball-number hero__ball-number--b">42</span></div>
+  <div class="hero__content">
+    <sc-if value="{{ showRealMoney }}" hint-placeholder-val="{{ true }}">
+      <div class="hero__badges">
+        <span class="hero__badge"><span class="hero__badge-dot"></span>A casa n0 1 do Bingo</span>
+      </div>
+    </sc-if>
+    <h1 id="h1" class="hero__title">Jogue bingo online no <span style="color:#36FF00">Dr.&nbsp;Bingo Bet</span></h1>
+    <p class="hero__subtitle">Conheça nossos jogos de bingo exclusivos. Faça seu cadastro e divirta-se na casa número 1 de bingo do Brasil!</p>
+    <div class="hero__actions">
+      <a href="{{ links.signup }}" data-cta="hero_cadastrar_jogar" onClick="{{ onCta }}" class="btn-primary btn-primary--lg cta-glow--delayed">Criar minha conta <span aria-hidden="true" class="btn-arrow btn-arrow--lg">▶</span></a>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Diferencial" aria-labelledby="h-dif" class="diff">
+  <div class="diff__inner">
+    <div class="diff__text">
+      <h2 id="h-dif" class="diff__title">Jogos de bingo exclusivos</h2>
+      <p class="diff__desc">Explore uma coleção de títulos autorais.</p>
+    </div>
+    <sc-if value="{{ showGameCount }}" hint-placeholder-val="{{ true }}">
+      <div class="diff__count-wrap">
+        <span class="diff__count-number" ref="{{ countRef }}">{{ countVal }}</span>
+        <span class="diff__count-label">títulos</span>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<div aria-hidden="true" class="marquee"><div class="marquee__track"><span class="marquee__item">Bingo online<span class="marquee__dot marquee__dot--green">●</span></span><span class="marquee__item marquee__item--outline">Jogos exclusivos<span class="marquee__dot marquee__dot--pink">●</span></span><span class="marquee__item">Dr. Bingo<span class="marquee__dot marquee__dot--amber">●</span></span><span class="marquee__item marquee__item--outline">Bingo online<span class="marquee__dot marquee__dot--green">●</span></span><span class="marquee__item">Jogos exclusivos<span class="marquee__dot marquee__dot--pink">●</span></span><span class="marquee__item marquee__item--outline">Dr. Bingo<span class="marquee__dot marquee__dot--amber">●</span></span><span class="marquee__item">Bingo online<span class="marquee__dot marquee__dot--green">●</span></span><span class="marquee__item marquee__item--outline">Jogos exclusivos<span class="marquee__dot marquee__dot--pink">●</span></span><span class="marquee__item">Dr. Bingo<span class="marquee__dot marquee__dot--amber">●</span></span><span class="marquee__item marquee__item--outline">Bingo online<span class="marquee__dot marquee__dot--green">●</span></span><span class="marquee__item">Jogos exclusivos<span class="marquee__dot marquee__dot--pink">●</span></span><span class="marquee__item marquee__item--outline">Dr. Bingo<span class="marquee__dot marquee__dot--amber">●</span></span></div></div>
+
+<section id="jogos" data-screen-label="Galeria de jogos" aria-labelledby="h-jogos" class="games">
+  <div data-reveal="" class="games__intro">
+    <span class="eyebrow">Seleção de jogos</span>
+    <h2 id="h-jogos" class="section-title">Escolha seu jogo de bingo</h2>
+    <p class="games__note">Saiba mais sobre cada jogo!</p>
+  </div>
+
+  <div class="games__grid">
+    <article data-reveal="" aria-live="polite" class="game-feature">
+      <div ref="{{ featRef }}" role="img" aria-label="{{ sel.artAlt }}" class="game-feature__media" style="{{ sel.mediaStyle }}">
+        <sc-if value="{{ sel.hasVideo }}" hint-placeholder-val="{{ false }}">
+          <video ref="{{ videoRef }}" class="feature-video" src="{{ sel.video }}" autoplay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" aria-hidden="true"></video>
+        </sc-if>
+        <span class="game-feature__index">{{ sel.idx }} / 10</span>
+        <span class="game-feature__tag">arte oficial · {{ sel.name }}</span>
+      </div>
+      <div class="game-feature__body">
+        <div class="game-feature__text">
+          <h3 ref="{{ selNameRef }}" class="game-feature__title">{{ sel.name }}</h3>
+          <p class="game-feature__desc">{{ sel.desc }}</p>
+        </div>
+        <a href="{{ sel.href }}" data-cta="{{ sel.ctaId }}" onClick="{{ onCta }}" aria-label="{{ sel.ctaLabel }}" class="btn-primary btn-primary--md">{{ cardCta }}</a>
+      </div>
+    </article>
+
+    <ul aria-label="Jogos da coleção" class="game-list">
+      <sc-for list="{{ games }}" as="g" hint-placeholder-count="10">
+        <li data-reveal="" data-reveal-delay="{{ g.delay }}">
+          <button type="button" aria-pressed="{{ g.pressed }}" aria-label="{{ g.selectLabel }}" onClick="{{ g.select }}" class="game-tile">
+            <span class="game-tile__art" style="opacity:{{ g.dim }}">
+              <sc-if value="{{ g.hasVideo }}" hint-placeholder-val="{{ false }}">
+                <video ref="{{ videoRef }}" class="tile-video" src="{{ g.video }}" autoplay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" aria-hidden="true"></video>
+              </sc-if>
+              <sc-if value="{{ g.hasImage }}" hint-placeholder-val="{{ true }}">
+                <span class="tile-bg" style="background:{{ g.art }}"></span>
+              </sc-if>
+            </span>
+            <span class="game-tile__meta" style="border-top-color:{{ g.bar }}">
+              <span class="game-tile__name">{{ g.name }}</span>
+              <span class="game-tile__index">{{ g.idx }}</span>
+            </span>
+          </button>
+        </li>
+      </sc-for>
+    </ul>
+  </div>
+</section>
+
+<section id="como-comecar" data-screen-label="Como começar" aria-labelledby="h-comecar" class="steps">
+  <div class="steps__inner">
+    <div class="steps__head">
+      <h2 id="h-comecar" class="section-title section-title--narrow">Comece em poucos passos</h2>
+      <a href="{{ links.signup }}" data-cta="passos_criar_conta" onClick="{{ onCta }}" class="btn-primary btn-primary--md">Criar minha conta</a>
+    </div>
+    <ol class="steps__list">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+        <li data-reveal="" data-reveal-delay="{{ s.delay }}" class="step-card" style="border-left-color:{{ s.color }}">
+          <span aria-hidden="true" class="step-card__num">{{ s.nn }}</span>
+          <span class="step-card__label" style="color:{{ s.color }}"><span aria-hidden="true" class="step-card__dot" style="background:{{ s.color }}"></span>Passo {{ s.nn }}</span>
+          <h3 class="step-card__title">{{ s.title }}</h3>
+        </li>
+      </sc-for>
+    </ol>
+  </div>
+</section>
+
+<section ref="{{ drawRef }}" data-screen-label="Sorteio visual" aria-labelledby="h-sorteio" data-won="{{ cardWon }}" class="draw">
+  <canvas ref="{{ confettiRef }}" aria-hidden="true" class="draw__confetti"></canvas>
+  <div class="draw__inner">
+    <div data-reveal="" class="draw__intro">
+      <span class="eyebrow">Sorteio</span>
+      <h2 id="h-sorteio" class="section-title">O universo do bingo</h2>
+      <p class="draw__note">Puxe a alavanca, acompanhe as bolas e tente completar uma linha da cartela!</p>
+    </div>
+    <div data-reveal="" class="draw__visual">
+      <div class="draw__machine">
+        <div ref="{{ globeRef }}" aria-hidden="true" class="draw__globe">
+          <div class="draw__globe-ring"></div>
+          <div class="draw__globe-balls">
+            <sc-for list="{{ globeBalls }}" as="b" hint-placeholder-count="8">
+              <span ref="{{ b.ref }}" class="draw__ball" style="left:{{ b.x }}%;top:{{ b.y }}%;background:{{ b.bg }}">{{ b.n }}</span>
+            </sc-for>
+          </div>
+        </div>
+        <button type="button" onClick="{{ pullLever }}" aria-disabled="{{ drawBusy }}" aria-label="Puxar a alavanca e sortear uma bola" class="draw__lever">
+          <span aria-hidden="true" class="draw__lever-mount"></span>
+          <span aria-hidden="true" class="draw__lever-arm" style="transform:rotate({{ leverAngle }}deg)"><span class="draw__lever-knob"></span></span>
+          <span aria-hidden="true" class="draw__lever-pivot"></span>
+        </button>
+      </div>
+      <div aria-live="polite" class="draw__reveal">
+        {{ revealedBall }}
+        <span class="draw__reveal-caption">{{ drawCaption }}</span>
+      </div>
+    </div>
+    <div class="draw__side">
+      <div ref="{{ cardRef }}" data-reveal="" data-reveal-delay="150" class="bingo-card" data-won="{{ cardWon }}">
+        <sc-if value="{{ showBanner }}" hint-placeholder-val="{{ false }}">
+          <div aria-hidden="true" class="bingo-banner">
+            <span class="bingo-banner__word">
+              <span class="bingo-banner__letter" style="color:#36FF00;--d:0ms">B</span><span class="bingo-banner__letter" style="color:#FF39DB;--d:90ms">I</span><span class="bingo-banner__letter" style="color:#FFB400;--d:180ms">N</span><span class="bingo-banner__letter" style="color:#15E4FF;--d:270ms">G</span><span class="bingo-banner__letter" style="color:#FFFFFF;--d:360ms">O</span><span class="bingo-banner__letter" style="color:#36FF00;--d:450ms">!</span>
+            </span>
+            <span class="bingo-banner__sub">Linha completa!</span>
+          </div>
+        </sc-if>
+        <div class="bingo-card__top">
+          <h3 class="bingo-card__title">Sua cartela</h3>
+          <span class="bingo-card__count">{{ drawnCount }}</span>
+        </div>
+        <div aria-hidden="true" class="bingo-card__head">
+          <span style="color:#36FF00">B</span><span style="color:#FF39DB">I</span><span style="color:#FFB400">N</span><span style="color:#15E4FF">G</span><span style="color:#FFFFFF">O</span>
+        </div>
+        <div class="bingo-card__grid">
+          <sc-for list="{{ cardCells }}" as="c" hint-placeholder-count="25">
+            <span role="img" aria-label="{{ c.aria }}" class="bingo-cell" data-free="{{ c.free }}" data-marked="{{ c.marked }}" data-win="{{ c.win }}" style="--d:{{ c.delay }}ms"><span aria-hidden="true" class="bingo-cell__num">{{ c.label }}</span></span>
+          </sc-for>
+        </div>
+        <div class="bingo-card__foot">
+          <span class="bingo-card__status">{{ cardStatus }}</span>
+          <button type="button" onClick="{{ newCard }}" class="bingo-card__new">Nova cartela</button>
+        </div>
+      </div>
+      <p class="draw__disclaimer">Animação ilustrativa. Não representa um sorteio ou resultado real.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" data-screen-label="FAQ" aria-labelledby="h-faq" class="faq">
+  <h2 data-reveal="" id="h-faq" class="section-title section-title--faq">Perguntas frequentes</h2>
+  <div class="faq__list">
+    <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="7">
+      <details data-reveal="" data-reveal-delay="{{ f.delay }}" onToggle="{{ f.onToggle }}" class="faq__item">
+        <summary class="faq__summary">
+          <h3 class="faq__question">{{ f.q }}</h3>
+          <span aria-hidden="true" class="faq__icon" style="transform:rotate({{ f.rot }}deg);background:{{ f.plusBg }}">+</span>
+        </summary>
+        <div class="faq__answer">
+          <p class="faq__answer-text">{{ f.a }}</p>
+          <a href="{{ f.href }}" class="faq__answer-link">{{ f.linkLabel }} →</a>
+        </div>
+      </details>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="CTA final" aria-labelledby="h-final" class="cta-final">
+  <div aria-hidden="true" class="cta-final__grid"></div>
+  <div data-reveal="" class="cta-final__content">
+    <h2 id="h-final" class="cta-final__title">Pronto para conhecer os jogos de bingo do <span style="color:#36FF00">Dr. Bingo Bet?</span></h2>
+    <p class="cta-final__subtitle">Crie sua conta e explore os títulos disponíveis.</p>
+    <a href="{{ links.signup }}" data-cta="final_cadastrar_jogar" onClick="{{ onCta }}" class="btn-primary btn-primary--xl cta-glow">Criar minha conta <span aria-hidden="true" class="btn-arrow btn-arrow--xl">▶</span></a>
+  </div>
+</section>
+
+</main>
+
+<footer data-screen-label="Rodapé" class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <img src="assets/logo.png" alt="Dr. Bingo" width="134" height="23" class="brand-logo">
+      <nav aria-label="Links institucionais" class="site-footer__nav">
+        <a href="{{ links.terms }}" class="site-footer__link">Termos e condições</a>
+        <a href="{{ links.privacy }}" class="site-footer__link">Política de privacidade</a>
+        <a href="{{ links.support }}" class="site-footer__link">Suporte</a>
+        <a href="{{ links.responsible }}" class="site-footer__link">Jogo responsável</a>
+      </nav>
+    </div>
+    <div class="site-footer__legal">
+      <span class="site-footer__age-badge">18+</span>
+      <p class="site-footer__legal-text">Proibido para menores de 18 anos. Jogue com responsabilidade. [Inserir aqui os avisos legais, dados da empresa e informações regulatórias aprovados pela Dr. Bingo.]</p>
+    </div>
+    <p class="site-footer__copyright">© Dr. Bingo. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
+  <div class="sticky-cta">
+    <a href="{{ links.signup }}" data-cta="sticky_cadastrar_jogar" onClick="{{ onCta }}" class="btn-primary btn-primary--sticky">Criar minha conta</a>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;cardCta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Criar minha conta&quot;,&quot;Jogar agora&quot;,&quot;Ver jogo&quot;],&quot;default&quot;:&quot;Criar minha conta&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Galeria&quot;},&quot;showRealMoney&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo a aprovar&quot;},&quot;showGameCount&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo a aprovar&quot;},&quot;animateDraw&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Experiência&quot;},&quot;mobileSticky&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Experiência&quot;}}">
+const GAME_NAMES = ["Pachinko","90's Turbo","American Champion","Fun Bingo","NineBalls","Pharao's","ShowBall3","Silver Ball","Super Bonus","SuperGoal"];
+const GAME_THUMBS = [null,"assets/thumbs/90sturbo.png","assets/thumbs/american-champion.png","assets/thumbs/fun-bingo.png","assets/thumbs/nineballs.png","assets/thumbs/pharaos.png","assets/thumbs/showball3.png","assets/thumbs/silverball.png","assets/thumbs/superbonus.png","assets/thumbs/thumb-super-goal.png"];
+const GAME_VIDEOS = ["assets/thumbs/pachinko3_1.mp4",null,null,null,null,null,null,null,null,null];
+const HUES = [300, 265, 220, 190, 150, 110, 60, 25, 340, 240];
+const STRIPES = "repeating-linear-gradient(135deg,rgba(255,255,255,0.06) 0 10px,transparent 10px 20px),";
+const BALL_COLORS = ["#36FF00", "#FF39DB", "#FFB400", "#FFFFFF"];
+const GLOBE_SIZE = 8;
+// 75-ball card: column c holds numbers c*15+1 … c*15+15; index 12 (center) is the free space
+const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const makeCard = () => {
+  const cols = [0, 1, 2, 3, 4].map(c => shuffle(Array.from({ length: 15 }, (_, k) => c * 15 + k + 1)).slice(0, 5));
+  return Array.from({ length: 25 }, (_, i) => i === 12 ? null : cols[i % 5][Math.floor(i / 5)]);
+};
+const freshMarks = () => Array.from({ length: 25 }, (_, i) => i === 12);
+const LINES = [
+  ...[0, 1, 2, 3, 4].map(r => [0, 1, 2, 3, 4].map(c => r * 5 + c)),
+  ...[0, 1, 2, 3, 4].map(c => [0, 1, 2, 3, 4].map(r => r * 5 + c)),
+  [0, 6, 12, 18, 24], [4, 8, 12, 16, 20]
+];
+// The unfinished line closest to completion — the draw is nudged toward it so a bingo comes in a handful of pulls
+const targetLine = (marks) => {
+  let best = LINES[0], most = -1;
+  for (const L of LINES) { const n = L.filter(i => marks[i]).length; if (n < 5 && n > most) { most = n; best = L; } }
+  return best;
+};
+const pickNumber = (card, marks, exclude) => {
+  const onLine = targetLine(marks).filter(i => !marks[i]).map(i => card[i]).filter(n => !exclude.has(n));
+  const onCard = card.filter((n, i) => n && !marks[i] && !exclude.has(n));
+  const r = Math.random();
+  let pool = r < 0.5 && onLine.length ? onLine : r < 0.75 && onCard.length ? onCard : null;
+  if (!pool) { pool = []; for (let n = 1; n <= 75; n++) if (!exclude.has(n)) pool.push(n); }
+  return pool[Math.floor(Math.random() * pool.length)];
+};
+const newGame = () => {
+  const card = makeCard(), marks = freshMarks(), globeNums = [];
+  while (globeNums.length < GLOBE_SIZE) globeNums.push(pickNumber(card, marks, new Set(globeNums)));
+  return { card, marks, globeNums, drawnNums: [], won: null, lastHit: false, drawn: null };
+};
+// Globe physics, in % of the globe's size: balls are 15% wide, so a ball center stays within GLOBE_R of the middle
+const GLOBE_R = 41.5, BALL_D = 14.6, GRAVITY = 140;
+// kick = random turbulence, jet = upward air from the bottom of the globe, max = speed cap
+const AGITATION = { idle: { kick: 1400, jet: 260, max: 90 }, mix: { kick: 5200, jet: 700, max: 230 }, party: { kick: 7500, jet: 1200, max: 320 }, calm: { kick: 0, jet: 0, max: 90 } };
+const CONFETTI_COLORS = ["#36FF00", "#FF39DB", "#FFB400", "#15E4FF", "#FFFFFF", "#11d4a0"];
+const BANNER_MS = 3200, PARTY_MS = 2600;
+const MIX_MS = 1700, EXIT_MS = 450;
+const globeStart = (i) => { const a = (i / GLOBE_SIZE) * Math.PI * 2, r = i % 2 ? 24 : 34; return { x: 50 + Math.cos(a) * r, y: 50 + Math.sin(a) * r }; };
+
+class Component extends DCLogic {
+  countRef = React.createRef(); featRef = React.createRef(); selNameRef = React.createRef(); globeRef = React.createRef(); drawRef = React.createRef(); cardRef = React.createRef(); confettiRef = React.createRef();
+  state = { y: 0, count: 10, faqOpen: {}, w: typeof window !== "undefined" ? window.innerWidth : 1280, menuOpen: false, scrolled: false, sel: 0, ...newGame(), drawKey: 0, leverDown: false, drawBusy: false };
+  balls = Array.from({ length: GLOBE_SIZE }, (_, i) => ({ ...globeStart(i), vx: 0, vy: 0, rot: 0, exit: null, alpha: 1 }));
+  ballEls = [];
+  ballRefs = Array.from({ length: GLOBE_SIZE }, (_, i) => (el) => { this.ballEls[i] = el; });
+  mode = "idle";
+  drawTimers = [];
+
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth, menuOpen: window.innerWidth >= 1040 ? false : this.state.menuOpen });
+    this.onScroll = () => { const s = window.scrollY > 560, t = window.scrollY > 8; if (s !== this.state.scrolled || t !== this.state.y) this.setState({ scrolled: s, y: t }); };
+    window.addEventListener("resize", this.onResize);
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    this.mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!this.mq.matches) { this.setupReveal(); this.setupGlobe(); }
+  }
+  setupReveal() {
+    const vh = window.innerHeight;
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const el = en.target; this.io.unobserve(el);
+        if (el === this.countRef.current) { this.runCount(); return; }
+        const d = +(el.getAttribute("data-reveal-delay") || 0);
+        el.style.opacity = "";
+        el.animate([{ opacity: 0, transform: "translateY(36px)" }, { opacity: 1, transform: "none" }], { duration: 700, delay: d, easing: "cubic-bezier(.2,.8,.2,1)", fill: "backwards" });
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll("[data-reveal]").forEach(el => {
+      if (el.getBoundingClientRect().top < vh * 0.9) return;
+      el.style.opacity = "0"; this.io.observe(el);
+    });
+    const c = this.countRef.current;
+    if (c && c.getBoundingClientRect().top > vh * 0.9) { this.setState({ count: 0 }); this.io.observe(c); }
+  }
+  runCount() {
+    const t0 = performance.now(), dur = 900;
+    const tick = (t) => { const k = Math.min(1, (t - t0) / dur); this.setState({ count: Math.round(10 * (1 - Math.pow(1 - k, 3))) }); if (k < 1) this.raf = requestAnimationFrame(tick); };
+    this.raf = requestAnimationFrame(tick);
+  }
+  pop(ref, kf, ms) { const el = ref.current; if (el && !(this.mq && this.mq.matches)) el.animate(kf, { duration: ms, easing: "cubic-bezier(.2,1.2,.3,1)" }); }
+  videoRef = (el) => { if (!el) return; el.muted = true; el.defaultMuted = true; el.loop = true; el.playsInline = true; const p = el.play(); if (p && p.catch) p.catch(() => {}); };
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("scroll", this.onScroll);
+    if (this.io) this.io.disconnect();
+    if (this.globeIo) this.globeIo.disconnect();
+    cancelAnimationFrame(this.raf);
+    this.stopSim();
+    cancelAnimationFrame(this.confettiRaf);
+    this.drawTimers.forEach(clearTimeout);
+  }
+  // Run the ball simulation only while the globe is on screen
+  setupGlobe() {
+    if (!this.globeRef.current) return;
+    this.globeIo = new IntersectionObserver(([en]) => { if (en.isIntersecting) this.startSim(); else this.stopSim(); });
+    this.globeIo.observe(this.globeRef.current);
+  }
+  startSim() {
+    if (this.drawRaf) return;
+    this.lastT = performance.now();
+    const loop = (t) => {
+      const dt = Math.min(0.033, (t - this.lastT) / 1000);
+      this.lastT = t;
+      this.stepSim(dt, t);
+      this.paintBalls();
+      this.drawRaf = requestAnimationFrame(loop);
+    };
+    this.drawRaf = requestAnimationFrame(loop);
+  }
+  stopSim() { cancelAnimationFrame(this.drawRaf); this.drawRaf = 0; }
+  stepSim(dt, now) {
+    const cfg = AGITATION[this.mode !== "idle" ? this.mode : (this.props.animateDraw ?? true) ? "idle" : "calm"];
+    const damp = Math.exp(-1.1 * dt);
+    const live = [];
+    for (const b of this.balls) {
+      if (b.exit) {
+        // Drawn ball drops out through the bottom of the globe and fades
+        const k = Math.min(1, (now - b.exit.t0) / EXIT_MS), e = k * k;
+        b.x = b.exit.x + (50 - b.exit.x) * e;
+        b.y = b.exit.y + (104 - b.exit.y) * e;
+        b.rot += 540 * dt;
+        b.alpha = k < 0.6 ? 1 : 1 - (k - 0.6) / 0.4;
+        continue;
+      }
+      live.push(b);
+      b.vx = (b.vx + (Math.random() - 0.5) * cfg.kick * dt) * damp;
+      b.vy = (b.vy + ((Math.random() - 0.5) * cfg.kick + GRAVITY - (b.y > 66 ? cfg.jet : 0)) * dt) * damp;
+      const sp = Math.hypot(b.vx, b.vy);
+      if (sp > cfg.max) { b.vx *= cfg.max / sp; b.vy *= cfg.max / sp; }
+      b.x += b.vx * dt; b.y += b.vy * dt; b.rot += b.vx * dt * 7;
+      const dx = b.x - 50, dy = b.y - 50, d = Math.hypot(dx, dy);
+      if (d > GLOBE_R) {
+        const nx = dx / d, ny = dy / d, vn = b.vx * nx + b.vy * ny;
+        b.x = 50 + nx * GLOBE_R; b.y = 50 + ny * GLOBE_R;
+        if (vn > 0) { b.vx -= 1.85 * vn * nx; b.vy -= 1.85 * vn * ny; }
+      }
+    }
+    for (let i = 0; i < live.length; i++) {
+      for (let j = i + 1; j < live.length; j++) {
+        const a = live[i], c = live[j];
+        const dx = c.x - a.x, dy = c.y - a.y, d = Math.hypot(dx, dy);
+        if (d >= BALL_D || d < 0.001) continue;
+        const nx = dx / d, ny = dy / d, o = (BALL_D - d) / 2;
+        a.x -= nx * o; a.y -= ny * o; c.x += nx * o; c.y += ny * o;
+        const rel = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
+        if (rel < 0) { const j2 = 0.95 * rel; a.vx += j2 * nx; a.vy += j2 * ny; c.vx -= j2 * nx; c.vy -= j2 * ny; }
+      }
+    }
+  }
+  paintBalls() {
+    this.balls.forEach((b, i) => {
+      const el = this.ballEls[i];
+      if (!el) return;
+      el.style.left = b.x + "%";
+      el.style.top = b.y + "%";
+      el.style.transform = `rotate(${b.rot}deg)`;
+      el.style.opacity = b.exit ? b.alpha : "";
+    });
+  }
+  pullLever = () => {
+    if (this.state.drawBusy) return;
+    // After a bingo, the next pull starts a new card
+    this.setState(this.state.won ? { ...newGame(), banner: false, leverDown: true, drawBusy: true } : { leverDown: true, drawBusy: true });
+    const later = (fn, ms) => this.drawTimers.push(setTimeout(fn, ms));
+    later(() => this.setState({ leverDown: false }), 320);
+    if (!this.drawRaf) { later(() => this.finishDraw(this.chooseExitBall()), 350); return; }
+    this.mode = "mix";
+    later(() => {
+      const k = this.chooseExitBall(), b = this.balls[k];
+      b.exit = { t0: performance.now(), x: b.x, y: b.y };
+      this.mode = "idle";
+      later(() => this.finishDraw(k), EXIT_MS);
+    }, MIX_MS);
+  };
+  newCard = () => { if (!this.state.drawBusy) this.setState({ ...newGame(), banner: false }); };
+  // Usually a ball that helps the closest line, sometimes any card number, otherwise whichever ball is lowest
+  chooseExitBall() {
+    const { card, marks, globeNums } = this.state;
+    const line = targetLine(marks);
+    const onLine = [], onCard = [];
+    globeNums.forEach((n, k) => {
+      const ci = card.indexOf(n);
+      if (ci < 0 || marks[ci]) return;
+      onCard.push(k);
+      if (line.includes(ci)) onLine.push(k);
+    });
+    const r = Math.random();
+    if (onLine.length && r < 0.7) return onLine[Math.floor(Math.random() * onLine.length)];
+    if (onCard.length && r < 0.85) return onCard[Math.floor(Math.random() * onCard.length)];
+    let k = 0;
+    this.balls.forEach((b, i) => { if (b.y > this.balls[k].y) k = i; });
+    return k;
+  }
+  finishDraw(k) {
+    const { card, globeNums, drawnNums } = this.state;
+    const n = globeNums[k], drawnNow = [...drawnNums, n];
+    const marks = this.state.marks.slice(), ci = card.indexOf(n);
+    if (ci >= 0) marks[ci] = true;
+    const won = LINES.find(L => L.every(i => marks[i])) || null;
+    const nums = globeNums.slice();
+    nums[k] = pickNumber(card, marks, new Set([...nums, ...drawnNow]));
+    // A fresh ball drops back in from the top
+    Object.assign(this.balls[k], { x: 50 + (Math.random() - 0.5) * 20, y: 50 - GLOBE_R + 2, vx: (Math.random() - 0.5) * 60, vy: 40, exit: null, alpha: 1 });
+    this.setState(s => ({ globeNums: nums, marks, won, drawnNums: drawnNow, lastHit: ci >= 0, drawn: { n, color: BALL_COLORS[k % BALL_COLORS.length] }, drawKey: s.drawKey + 1, drawBusy: false }));
+    if (won) this.celebrate();
+  }
+  // BINGO: banner over the card, confetti across the section, and the globe goes wild
+  celebrate() {
+    const later = (fn, ms) => this.drawTimers.push(setTimeout(fn, ms));
+    this.setState({ banner: true });
+    later(() => this.setState({ banner: false }), BANNER_MS);
+    if (this.mq && this.mq.matches) return;
+    this.mode = "party";
+    later(() => { if (this.mode === "party") this.mode = "idle"; }, PARTY_MS);
+    this.confetti = [];
+    this.burst(true);
+    later(() => this.burst(false), 650);
+    later(() => this.burst(false), 1300);
+  }
+  // First wave explodes out of the card; every wave also fires cannons from the section's bottom corners
+  burst(fromCard) {
+    const cv = this.confettiRef.current, sec = this.drawRef.current;
+    if (!cv || !sec) return;
+    const r = sec.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (cv.width !== Math.round(r.width * dpr) || cv.height !== Math.round(r.height * dpr)) {
+      cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+    }
+    this.cW = r.width; this.cH = r.height; this.cDpr = dpr;
+    const add = (x, y, angle, spread, speed, n) => {
+      for (let i = 0; i < n; i++) {
+        const a = angle + (Math.random() - 0.5) * spread, s = speed * (0.45 + Math.random() * 0.75);
+        this.confetti.push({
+          x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, age: 0,
+          w: 7 + Math.random() * 8, h: 4 + Math.random() * 6, rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 14,
+          tilt: Math.random() * 6.28, vt: 5 + Math.random() * 9, round: Math.random() < 0.25,
+          c: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)]
+        });
+      }
+    };
+    if (fromCard && this.cardRef.current) {
+      const cr = this.cardRef.current.getBoundingClientRect();
+      add(cr.left - r.left + cr.width / 2, cr.top - r.top + cr.height * 0.4, 0, Math.PI * 2, 1100, 140);
+    }
+    add(0, r.height, -Math.PI / 3, 0.55, 1700, 70);
+    add(r.width, r.height, -Math.PI * 2 / 3, 0.55, 1700, 70);
+    if (!this.confettiRaf) { this.confettiT = performance.now(); this.confettiRaf = requestAnimationFrame(this.confettiLoop); }
+  }
+  confettiLoop = (t) => {
+    const cv = this.confettiRef.current;
+    const dt = Math.min(0.033, (t - this.confettiT) / 1000);
+    this.confettiT = t;
+    if (!cv) { this.confettiRaf = 0; return; }
+    const ctx = cv.getContext("2d"), drag = Math.exp(-2.6 * dt);
+    ctx.setTransform(this.cDpr, 0, 0, this.cDpr, 0, 0);
+    ctx.clearRect(0, 0, this.cW, this.cH);
+    this.confetti = this.confetti.filter(p => p.age < 5 && p.y < this.cH + 40);
+    for (const p of this.confetti) {
+      p.age += dt;
+      p.vx *= drag; p.vy = p.vy * drag + 1000 * dt;
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      p.rot += p.vr * dt; p.tilt += p.vt * dt;
+      ctx.save();
+      ctx.globalAlpha = p.age > 4 ? 5 - p.age : 1;
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.c;
+      if (p.round) { ctx.beginPath(); ctx.arc(0, 0, p.h * 0.6, 0, 6.28); ctx.fill(); }
+      else { ctx.scale(1, Math.cos(p.tilt)); ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+      ctx.restore();
+    }
+    this.confettiRaf = this.confetti.length ? requestAnimationFrame(this.confettiLoop) : 0;
+  };
+
+  renderVals() {
+    const p = this.props;
+    const cardCta = p.cardCta ?? "Criar minha conta";
+    const isMobile = this.state.w < 1040;
+    const links = {
+      signup: "#link-cadastro", login: "#link-login", terms: "#link-termos", privacy: "#link-privacidade",
+      support: "#link-suporte", responsible: "#link-jogo-responsavel", deposit: "#link-deposito", social: "#link-jogo-social"
+    };
+    const games = GAME_NAMES.map((name, i) => {
+      const on = this.state.sel === i;
+      const thumb = GAME_THUMBS[i];
+      const video = GAME_VIDEOS[i];
+      const art = thumb ? `center/cover no-repeat url(${thumb})` : STRIPES + `linear-gradient(200deg,oklch(0.58 0.2 ${HUES[i]}) 0%,oklch(0.22 0.08 ${HUES[i]}) 100%)`;
+      return {
+        name,
+        idx: String(i + 1).padStart(2, "0"),
+        desc: "Descrição breve a confirmar com a equipe.",
+        art,
+        video: video || "",
+        hasVideo: !!video,
+        hasImage: !video,
+        mediaStyle: video ? "" : "background:" + art,
+        artAlt: "Arte oficial do jogo " + name,
+        href: links.signup,
+        ctaId: "jogo_" + (i + 1),
+        ctaLabel: cardCta + ": " + name,
+        selectLabel: "Selecionar " + name,
+        pressed: on ? "true" : "false",
+        bar: on ? "#36FF00" : "rgba(255,255,255,0.08)",
+        dim: on ? 1 : 0.72,
+        delay: (i % 5) * 60,
+        select: () => { if (this.state.sel === i) return; this.setState({ sel: i }); this.pop(this.featRef, [{ opacity: 0.2, transform: "scale(1.06)", filter: "brightness(1.6)" }, { opacity: 1, transform: "scale(1)", filter: "brightness(1)" }], 500); this.pop(this.selNameRef, [{ opacity: 0, transform: "translateX(-24px)" }, { opacity: 1, transform: "none" }], 450); }
+      };
+    });
+    const sel = games[this.state.sel];
+    const steps = [
+      { delay: 0, nn: "01", title: "Crie sua conta", color: "#36FF00" },
+      { delay: 120, nn: "02", title: "Faça seu primeiro depósito", color: "#FF39DB" },
+      { delay: 240, nn: "03", title: "Escolha um jogo de bingo", color: "#FFB400" }
+    ];
+    const T = "[Resposta a validar pela equipe] ";
+    const faqs = [
+      { q: "Quais jogos de bingo estão disponíveis?", a: T + "A coleção reúne títulos autorais da Dr. Bingo. A lista completa está na seção de jogos desta página.", href: "#jogos", linkLabel: "Ver jogos" },
+      { q: "Os jogos são exclusivos da Dr. Bingo?", a: T + "Os títulos são desenvolvidos pela produtora da própria casa.", href: "#jogos", linkLabel: "Conhecer a coleção" },
+      { q: "Como faço meu cadastro?", a: T + "Clique em “Criar minha conta” e siga as etapas indicadas na página oficial de cadastro.", href: links.signup, linkLabel: "Ir para o cadastro" },
+      { q: "Como faço um depósito?", a: T + "Após o cadastro, as opções de depósito ficam disponíveis na sua conta. Consulte a página oficial para detalhes.", href: links.deposit, linkLabel: "Informações sobre depósito" },
+      { q: "Preciso criar uma conta para jogar?", a: T + "Sim. Para jogar é necessário ter uma conta na Dr. Bingo.", href: links.signup, linkLabel: "Criar minha conta" },
+      { q: "Esta página é do jogo social da Dr. Bingo?", a: T + "Não. Esta página apresenta a experiência de cassino online com dinheiro real da Dr. Bingo, que é diferente do jogo social da marca.", href: links.social, linkLabel: "Conhecer o jogo social" },
+      { q: "Onde encontro informações sobre jogo responsável?", a: T + "As orientações e ferramentas de jogo responsável estão na página oficial dedicada ao tema.", href: links.responsible, linkLabel: "Jogo responsável" }
+    ];
+    faqs.forEach((f, i) => { const open = !!this.state.faqOpen[i]; f.delay = i * 60; f.rot = open ? 45 : 0; f.plusBg = open ? "rgba(54,255,0,0.15)" : "transparent"; f.onToggle = (e) => { const o = e.currentTarget.open; this.setState(s => ({ faqOpen: { ...s.faqOpen, [i]: o } })); }; });
+    // x/y are only the starting layout; the simulation moves the balls by writing to the DOM directly
+    const globeBalls = this.state.globeNums.map((n, i) => ({ n, ...globeStart(i), bg: BALL_COLORS[i % BALL_COLORS.length], ref: this.ballRefs[i] }));
+    const drawn = this.state.drawn;
+    const { card, marks, won } = this.state;
+    const winSet = new Set(won || []);
+    const cardCells = card.map((n, i) => ({
+      label: n == null ? "★" : n,
+      free: n == null ? "true" : "false",
+      marked: marks[i] ? "true" : "false",
+      win: winSet.has(i) ? "true" : "false",
+      delay: won ? Math.max(0, won.indexOf(i)) * 120 : 0,
+      aria: n == null ? "Espaço livre" : n + (marks[i] ? ", marcado" : "")
+    }));
+    const left = Math.min(...LINES.map(L => L.filter(i => !marks[i]).length));
+    const cardStatus = won ? "BINGO! Linha completa"
+      : this.state.drawnNums.length === 0 ? "Puxe a alavanca para sortear"
+      : left === 1 ? "Falta 1 número para o bingo!"
+      : `Faltam ${left} números para o bingo`;
+    const revealedBall = drawn
+      ? React.createElement("span", {
+          key: "rb" + this.state.drawKey,
+          className: "reveal-ball",
+          style: { background: drawn.color, boxShadow: `0 0 0 6px #13051E, 0 0 0 7px ${drawn.color}, 0 0 48px ${drawn.color}66`, animation: won ? "ballPop 650ms cubic-bezier(.2,1.4,.3,1), ballParty 900ms ease-in-out 650ms infinite" : "ballPop 650ms cubic-bezier(.2,1.4,.3,1)" }
+        }, drawn.n)
+      : React.createElement("span", {
+          key: "rb0",
+          className: "reveal-ball",
+          style: { background: "rgba(255,255,255,0.04)", color: "#AE9FC6", border: "2px dashed rgba(174,159,198,0.5)" }
+        }, "?");
+    return {
+      isMobile, isDesktop: !isMobile,
+      menuOpenStr: this.state.menuOpen ? "true" : "false",
+      showMobileMenu: isMobile && this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      countRef: this.countRef, featRef: this.featRef, selNameRef: this.selNameRef, countVal: this.state.count, videoRef: this.videoRef,
+      hdrShadow: this.state.y ? "0 10px 30px rgba(0,0,0,0.45)" : "none",
+      links, games, sel, steps, faqs, cardCta,
+      showRealMoney: p.showRealMoney ?? true,
+      showGameCount: p.showGameCount ?? true,
+      globeBalls, revealedBall, globeRef: this.globeRef, pullLever: this.pullLever,
+      drawBusy: this.state.drawBusy ? "true" : "false",
+      leverAngle: this.state.leverDown ? 165 : 15,
+      drawCaption: this.state.drawBusy ? "Sorteando…" : this.state.won ? "BINGO!" : drawn ? (this.state.lastHit ? "Tem na cartela!" : "Não está na cartela") : "Puxe a alavanca",
+      cardCells, cardStatus, newCard: this.newCard, showBanner: !!this.state.banner,
+      drawRef: this.drawRef, cardRef: this.cardRef, confettiRef: this.confettiRef,
+      cardWon: this.state.won ? "true" : "false",
+      drawnCount: this.state.drawnNums.length === 1 ? "1 bola" : this.state.drawnNums.length + " bolas",
+      showSticky: (p.mobileSticky ?? true) && isMobile && this.state.scrolled && !this.state.menuOpen,
+      pagePadBottom: (p.mobileSticky ?? true) && isMobile ? "76px" : "0px",
+      onCta: (e) => {
+        const id = e.currentTarget.getAttribute("data-cta");
+        (window.dataLayer = window.dataLayer || []).push({ event: "cta_click", cta_id: id });
+        if (this.state.menuOpen) this.setState({ menuOpen: false });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
