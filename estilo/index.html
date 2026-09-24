@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Bingo Bet - Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="overlay" data-close-sidebar></div>
+  <div class="mobile-nav">
+    <div class="logo mobile-logo"><img src="assets/images/drbingo-logo.png" alt="Dr. Bingo Bet"></div>
+    <div class="mobile-actions">
+      <button class="mobile-search-toggle" id="mobileSearchToggle" type="button" aria-label="Abrir busca"></button>
+      <div class="mobile-auth">
+        <button class="btn btn-login">Entrar</button>
+        <button class="btn btn-register">Registrar</button>
+      </div>
+      <button class="drawer-toggle" id="openSidebar" type="button" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+
+  <div class="app">
+    <aside class="sidebar" aria-label="Menu lateral">
+      <div class="brand-row">
+        <button class="hamburger" id="toggleSidebar" type="button" aria-label="Recolher menu">☰</button>
+      </div>
+      <div class="sidebar-content" id="sidebarContent">
+      <div class="sidebar-box">
+        <div class="sidebar-title"><img src="assets/icons/categories.png" alt="Descrição da imagem"> Principais categorias</div>
+        <a class="side-card" href="#bingo">
+          <div><strong>Bingo</strong><span class="tag-high">🔥 EM ALTA</span></div>
+          <img class="animate-img" src="assets/images/main-categories-bingo.gif" alt="neko">
+        </a>
+        <div class="side-card-row">
+        <a class="side-card" href="#crash">
+          <div><strong>Crash</strong></div>
+
+        </a>
+        <a class="side-card" href="#crash">
+          <div><strong>Ao Vivo</strong></div>
+        </a>
+        </div>
+        <a class="side-card" href="#slots">
+          <div><strong>Slots</strong><span class="tag-high">🔥 EM ALTA</span></div>
+          <img class="animate-img" src="assets/images/main-categories-slots.gif" alt="Descrição da imagem">
+        </a>
+      </div>
+
+      <a class="promo-card" href="#promos">
+        <span>Promoções<br>exclusivas</span>
+        <img class="promo-closed" src="assets/images/promotion-closed.png" alt="Promoção fechada">
+        <img class="promo-opened" src="assets/images/promotion-opened.png" alt="Promoção aberta">
+      </a>
+      <a class="sidebar-link" href="#faq"><img class="faq-img" src="assets/icons/faq.png" alt="faq"> Perguntas Frequentes <span class="external">↗</span></a>
+      <a class="sidebar-link" href="#support"><img class="support-img" src="assets/icons/support.png" alt="faq">  Suporte <span class="external">↗</span></a>
+
+      <div class="socials" aria-label="Redes sociais">
+        <span>◎</span><span>f</span><span>▶</span>
+      </div>
+      </div>
+    </aside>
+
+    <div class="page">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <div class="logo topbar-logo"><img src="assets/images/drbingo-logo.png" alt="Dr. Bingo Bet"></div>
+          <label class="search header-search" aria-label="Buscar jogos">
+            <input class="js-search-input" type="search" id="searchInput" placeholder="Buscar por jogo ou provedora" />
+            <img src="assets/icons/search.svg" alt="Icone busca">
+          </label>
+          <div class="auth">
+            <button class="btn btn-login">Entrar</button>
+            <button class="btn btn-register">Registrar</button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero-carousel" aria-label="Destaques">
+          <div class="banner-track">
+
+            <div class="banner-card active parallax-play">
+              <img class="parallax-bg layer-bg" src="assets/images/bg.png" alt="">
+              <img class="parallax-middle layer-middle" src="assets/images/confetes.png" alt="">
+              <img class="parallax-front layer-front" src="assets/images/personagem.png" alt="">
+
+              <div class="banner-content">
+                <span>Oferta limitada</span>
+                <h2>Ganhe 100% de bônus</h2>
+              </div>
+            </div>
+
+            <div class="banner-card active parallax-play">
+              <img class="parallax-bg layer-bg" src="assets/images/bg-2.png" alt="">
+              <img class="parallax-middle layer-middle" src="assets/images/confetes-2.png" alt="">
+              <img class="parallax-front layer-front" src="assets/images/personagem-2.png" alt="">
+
+              <div class="banner-content">
+                <span>Rodadas grátis</span>
+                <h2>Jogue e ganhe prêmios</h2>
+              </div>
+            </div>
+            <div class="banner-card active parallax-play">
+              <img class="parallax-bg layer-bg" src="assets/images/bg-3.png" alt="">
+              <img class="parallax-middle layer-middle" src="assets/images/confetes-3.png" alt="">
+              <img class="parallax-front layer-front" src="assets/images/personagem-3.png" alt="">
+              <img class="banner-text-image" src="assets/images/texto-teste.png" alt="">
+            </div>
+          </div>
+        </section>
+
+        <div class="dots"></div>
+
+        <div class="mobile-search-panel">
+          <label class="search mobile-content-search" aria-label="Buscar jogos">
+            <input class="js-search-input" type="search" id="mobileSearchInput" placeholder="Buscar por jogo ou provedora" />
+            <img src="assets/icons/search.svg" alt="Icone busca">
+          </label>
+        </div>
+
+        <nav class="chips" aria-label="Filtros rápidos">
+          <a class="chip" href="#favorites">⭐ Favoritos</a>
+          <a class="chip" href="#bingo">⚽ Bingo</a>
+          <a class="chip" href="#slots">🎰 Slots</a>
+          <a class="chip" href="#mais-jogados">🔥 Mais jogados</a>
+          <a class="chip" href="#exclusive">🌟 Exclusivos</a>
+          <a class="chip" href="#live">🎲 Live Cassino</a>
+          <a class="chip" href="#show">▶ Game Show</a>
+          <a class="chip" href="#crash">🚀 Crash Games</a>
+        </nav>
+
+        <section class="section" id="mais-jogados">
+          <div class="section-head">
+            <h2 class="section-title">🎲 Mais jogados <span class="count">181</span></h2>
+            <a class="see-all" href="#">Ver todos ›</a>
+          </div>
+          <div class="game-row" data-game-row="popular"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">🔥 Top 10 da semana</h2>
+            <a class="see-all" href="#">Ver todos ›</a>
+          </div>
+          <div class="top-week" id="topWeek"></div>
+        </section>
+
+        <section class="section feature-grid" id="exclusive">
+          <div class="video-banner">
+            <video autoplay muted loop playsinline>
+            <source src="assets/videos/hero-desktop.webm" type="video/webm">
+            Seu navegador não suporta vídeo.
+            </video>
+          </div>
+          <aside class="exclusive-panel">
+            <div class="panel-head">🌟 Jogos Exclusivos <a href="#">Ver todos ›</a></div>
+            <div class="mini-list" data-mini-list="exclusive"></div>
+          </aside>
+        </section>
+
+        <section class="section">
+          <div class="section-head"><h2 class="section-title">🏆 Provedores <span class="count">7</span></h2><a class="see-all" href="#">Ver todos ›</a></div>
+          <div class="providers" id="providers"></div>
+        </section>
+
+        <section class="section" id="slots">
+          <div class="section-head"><h2 class="section-title">🎰 Slots <span class="count">995</span></h2><a class="see-all" href="#">Ver todos ›</a></div>
+          <div class="slot-showcase" data-slot-showcase></div>
+        </section>
+
+        <section class="section" id="crash">
+          <div class="section-head"><h2 class="section-title">🚀 Crash Games <span class="count">8</span></h2><a class="see-all" href="#">Ver todos ›</a></div>
+          <div class="game-row" data-game-row="crash"></div>
+        </section>
+
+        <section class="section heat-grid">
+          <article class="ranking hot">
+            <h3>🔥 Pegando fogo</h3>
+            <p>Os jogos que mais pagaram nas últimas 24 horas</p>
+            <div class="rank-list" data-ranking="hot"></div>
+          </article>
+          <article class="ranking cold">
+            <h3>❄️ Esfriando</h3>
+            <p>Os jogos que menos pagaram nas últimas 24 horas</p>
+            <div class="rank-list" data-ranking="cold"></div>
+          </article>
+        </section>
+
+        <section class="section" id="bingo">
+          <div class="section-head"><h2 class="section-title">⚽ Bingo <span class="count">10</span></h2><a class="see-all" href="#">Ver todos ›</a></div>
+          <div class="game-row" data-game-row="bingo"></div>
+        </section>
+
+        <section class="section live-grid" id="live">
+          <div class="live-banner">
+            <div class="live-copy"><span>Os melhores jogos</span><strong>Ao vivo</strong></div>
+            <video autoplay muted loop playsinline>
+            <source src="assets/videos/livecassino.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+            </video>
+          </div>
+          <aside class="live-panel">
+            <div class="panel-head">🎲 Live Cassino <span class="count">404</span><a href="#">Ver todos ›</a></div>
+            <div class="mini-list" data-mini-list="live"></div>
+          </aside>
+        </section>
+
+        <section class="section" id="show">
+          <div class="section-head"><h2 class="section-title">▶ Game Show <span class="count">30</span></h2><a class="see-all" href="#">Ver todos ›</a></div>
+          <div class="slot-showcase" data-show-showcase></div>
+        </section>
+
+        <section class="copy-section">
+          <h2>Dr.Bingo: O melhor cassino online do Brasil</h2>
+          <p>Desfrute da variedade e emoção dos jogos de cassino online com o Dr.Bingo Bet. O cassino mais dinâmico e confiável online para você encontrar uma experiência de jogo única, com diversão, garantia e segurança em cada clique.</p>
+          <h3>Por que escolher o Cassino Online Dr. Bingo?</h3>
+          <ul>
+            <li>Variedade de jogos: explore uma ampla seleção de jogos de cassino online, incluindo slots, roleta, blackjack, popular ao vivo e muito mais.</li>
+            <li>Experiência imersiva: sinta-se em um cassino de verdade com gráficos envolventes, som realista e uma atmosfera de luxo.</li>
+            <li>Confiabilidade e segurança: a plataforma oferece transações protegidas e jogos justos para todos os jogadores.</li>
+          </ul>
+          <p>Jogue com responsabilidade. <a href="#">Ler mais ↓</a></p>
+        </section>
+      </main>
+
+      <div class="footer-wrap">
+        <footer>
+          <div class="logo footer-logo"><img src="assets/images/drbingo-logo.png" alt="Dr. Bingo Bet"></div>
+          <div class="footer-grid">
+            <div>
+              <h4>Métodos de Pagamento</h4>
+              <div class="pix"><span class="pix-icon"></span><span>pix</span></div>
+              <h4>Siga nossas redes sociais</h4>
+              <div class="footer-socials"><span class="circle">f</span><span class="circle">◎</span><span class="circle">▶</span></div>
+            </div>
+            <div>
+              <h4>Informações adicionais</h4>
+              <ul>
+                <li>Termos e condições</li><li>PLD/FT</li><li>Política de KYC</li><li>Jogo Responsável</li><li>Resolução de Disputas</li><li>Jogo Justo e RNG</li><li>Política de Cookies e Privacidade</li><li>Portal de Atendimento a Autoridades Policiais</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Ajuda</h4>
+              <ul>
+                <li>Perguntas Frequentes</li><li>Como Jogar</li><li>Política de Pagamento</li><li>Saque Responsável</li><li>Limites da Conta</li><li>Ferramentas da Conta</li><li>Autenticação Centralizada KYC</li><li>Contato</li>
+              </ul>
+            </div>
+          </div>
+          <div class="badges"><div class="badge">GOVERNO<br>FEDERAL</div><div class="badge">18+</div><div class="badge">JA</div><div class="badge">Verificado<br>Responsável</div></div>
+          <p class="footer-text">Este site é operado por TRACK GAMING BRASIL LTDA com CNPJ fictício. Este layout é uma recriação visual para fins de estudo de interface. O jogo envolve risco e deve ser praticado com responsabilidade por maiores de 18 anos.</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <button class="avatar-unlock-trigger" id="avatarUnlockTrigger" type="button" aria-haspopup="dialog" aria-controls="avatarUnlockOverlay">
+    <span class="avatar-unlock-trigger-icon" aria-hidden="true">&#127922;</span>
+    <span>Jogue e desbloqueie<small>seu avatar gr&aacute;tis</small></span>
+  </button>
+
+  <div class="avatar-unlock-overlay" id="avatarUnlockOverlay" hidden>
+    <section class="avatar-unlock-modal" role="dialog" aria-modal="true" aria-labelledby="avatarUnlockTitle">
+      <header class="avatar-unlock-header">
+        <img src="assets/images/drbingo-logo.png" alt="Dr. Bingo Bet">
+        <button class="avatar-unlock-close" id="avatarUnlockClose" type="button" aria-label="Fechar">&times;</button>
+      </header>
+
+      <div class="avatar-unlock-body">
+        <div id="avatarSlotStage">
+          <h2 id="avatarUnlockTitle">Desbloqueie uma surpresa!</h2>
+          <p class="avatar-unlock-subtitle"><strong>Experimente gr&aacute;tis</strong> e tente desbloquear<br>uma recompensa gr&aacute;tis no final.</p>
+
+          <div class="avatar-slot-machine">
+            <div class="avatar-slot-cabinet">
+              <img class="avatar-slot-cabinet-art" src="assets/images/avatar-unlock/slot-machine.png" alt="">
+              <div class="avatar-slot-reels" aria-live="polite" aria-label="Resultado da rodada">
+                <div class="avatar-slot-reel"><span class="avatar-slot-symbol">&#127808;</span></div>
+                <div class="avatar-slot-reel"><span class="avatar-slot-symbol">&#128142;</span></div>
+                <div class="avatar-slot-reel"><span class="avatar-slot-symbol">7&#65039;&#8419;</span></div>
+              </div>
+            </div>
+            <button class="avatar-slot-spin" id="avatarSlotSpin" type="button">GIRAR AGORA</button>
+            <p class="avatar-slot-count" id="avatarSlotCount">Tentativa 1 de 3</p>
+          </div>
+        </div>
+
+        <div class="avatar-win-stage" id="avatarWinStage" hidden>
+          <p class="avatar-win-badge">&#10024; VOC&Ecirc; GANHOU &#10024;</p>
+          <h2>Avatares desbloqueados!</h2>
+          <div class="avatar-prize-row" aria-label="Tr&ecirc;s avatares desbloqueados">
+            <span class="avatar-prize"><img src="assets/images/avatar-unlock/avatar-1.png" alt="Avatar desbloqueado 1" onerror="this.hidden=true"></span>
+            <span class="avatar-prize"><img src="assets/images/avatar-unlock/avatar-2.png" alt="Avatar desbloqueado 2" onerror="this.hidden=true"></span>
+            <span class="avatar-prize"><img src="assets/images/avatar-unlock/avatar-3.png" alt="Avatar desbloqueado 3" onerror="this.hidden=true"></span>
+          </div>
+          <p class="avatar-prize-copy">O conjunto Edi&ccedil;&atilde;o Sortudo foi reservado para voc&ecirc;.</p>
+          <button class="avatar-unlock-cta" id="avatarUnlockCta" type="button">CRIAR CONTA E RESGATAR</button>
+          <p class="avatar-unlock-note">Sem dep&oacute;sito. O pr&ecirc;mio &eacute; apenas um item visual.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="profile-overlay" id="profileOverlay" hidden>
+    <aside class="profile-modal" aria-label="Perfil do jogador">
+      <button class="profile-close" type="button" aria-label="Fechar" data-close-profile>×</button>
+
+      <h1 class="profile-title">Perfil</h1>
+
+      <section class="profile-user-card">
+        <div class="avatar-wrap">
+          <img src="assets/images/avatar.gif" alt="Avatar do usuário">
+        </div>
+
+        <div class="user-info">
+          <div class="user-heading">
+            <h2>patatica</h2>
+            <span class="user-id">ID #12354656799</span>
+          </div>
+
+          <div class="user-meta-grid">
+            <div class="info-line">
+              <div>
+                <img src="assets/icons/calendar.svg" alt="calendar">
+                <strong>Membro desde</strong>
+                <span>15/04/2023</span>
+              </div>
+            </div>
+
+            <div class="info-line">
+             
+              <div>
+                <img src="assets/icons/verified.svg" alt="verified">
+                <strong>Status da conta</strong>
+                <span>Usuário verificado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-section wallet-section">
+        <div class="section-header">
+          <div class="title-wallet">
+            <img src="assets/icons/wallet.png" alt="wallet">
+            <h2>Carteira</h2>
+          </div>  
+          <button class="transaction-btn" type="button">
+          Minhas Transações
+          <img src="assets/icons/chevron_right.svg" alt="chevron_right">
+        </button>
+        </div>
+
+        <div class="balance-box">
+          <div class="balance-item">
+            <span>Saldo atual</span>
+            <strong>R$ 1.250,00</strong>
+          </div>
+          <div class="wallet-actions">
+          <button class="btn-withdraw" type="button"><img src="assets/icons/chevron_right.svg" alt="chevron_right">Sacar</button>
+          <button class="btn-deposit" type="button"><img src="assets/icons/add.svg" alt="chevron_right">Depositar</button>
+        </div>
+        </div>
+
+         <div class="balance-box">
+          <div class="balance-item">
+            <span>Saldo bônus</span>
+            <strong class="bonus-value">R$ 350,00</strong>
+          </div>
+
+          <button class="rollover-btn" type="button"><img src="assets/icons/gift.svg" alt="gift">Meus Bônus</button>
+        </div>
+
+      </section>
+
+       <div class="title-settings">
+            <img src="assets/icons/settings.svg" alt="wallet">
+            <h2>Configurações</h2>
+          </div>
+
+      <div class="account-settings-row">
+          
+        <button class="account-settings-btn" type="button">
+          <img src="assets/icons/user.svg" alt="logout">
+          Opções de conta
+          <img src="assets/icons/chevron_right.svg" alt="logout">
+        </button>
+
+        <button class="quick-block-btn" type="button">
+        <span>!</span>
+        Bloqueio rápido
+        <img src="assets/icons/chevron_right.svg" alt="logout">
+      </button>
+      </div>
+
+      <div class="logout-actions">
+       <button class="logout-btn" type="button" data-profile-logout>
+        <img src="assets/icons/logout.png" alt="logout">
+        Sair
+      </button>
+      </div>
+    </aside>
+  </div>
+  <nav class="mobile-bottom-nav" aria-label="Navegação principal mobile">
+    <a href="#top"><span>⌂</span>Home</a>
+    <a href="#bingo"><span>●</span>Bingo</a>
+    <a href="#live"><span>▣</span>Ao Vivo</a>
+    <a href="#slots"><span>◆</span>Slots</a>
+    <a href="#crash"><span>↗</span>Crash</a>
+  </nav>
+  <script src="data/sidebar-states.js"></script>
+  <script src="data/header-states.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

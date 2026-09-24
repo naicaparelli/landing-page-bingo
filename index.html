@@ -13,47 +13,81 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&amp;family=Ubuntu:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Luckiest+Guy&amp;family=Ubuntu:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./layout.css">
 </helmet>
 
-<div class="page" style="padding-bottom:{{ pagePadBottom }}">
+<div class="app-shell">
+  <div class="overlay" data-close-sidebar onClick="{{ closeSidebar }}"></div>
+  <div class="mobile-nav">
+    <div class="logo mobile-logo"><img src="assets/images/drbingo-logo.png" alt="Dr. Bingo Bet"></div>
+    <div class="mobile-actions">
+      <button class="mobile-search-toggle" id="mobileSearchToggle" type="button" aria-label="Abrir busca"></button>
+      <div class="mobile-auth">
+        <button class="btn btn-login" type="button" data-cta="header_entrar_mobile" data-href="{{ links.login }}" onClick="{{ onAuthBtn }}">Entrar</button>
+        <button class="btn btn-register" type="button" data-cta="header_criar_conta_mobile" data-href="{{ links.signup }}" onClick="{{ onAuthBtn }}">Criar conta</button>
+      </div>
+      <button class="drawer-toggle" id="openSidebar" type="button" aria-label="Abrir menu" onClick="{{ openSidebar }}">☰</button>
+    </div>
+  </div>
+
+  <div class="app">
+    <aside class="sidebar" aria-label="Menu lateral" onClick="{{ onSidebarClick }}">
+      <div class="brand-row">
+        <button class="hamburger" id="toggleSidebar" type="button" aria-label="Recolher menu" onClick="{{ toggleSidebar }}">☰</button>
+      </div>
+      <div class="sidebar-content" id="sidebarContent">
+        <div class="sidebar-box">
+          <div class="sidebar-title"><img src="assets/icons/categories.png" alt="Categorias"> Principais categorias</div>
+          <a class="side-card side-card-bingo" href="#bingo">
+            <div><strong>Bingo</strong><span class="tag-high">🔥 EM ALTA</span></div>
+            <img class="animate-img" src="assets/images/main-categories-bingo.gif" alt="Bingo">
+          </a>
+          <div class="side-card-row">
+            <a class="side-card side-card-crash" href="#crash">
+              <div><strong>Crash</strong></div>
+            </a>
+            <a class="side-card side-card-live" href="#live">
+              <div><strong>Ao Vivo</strong></div>
+            </a>
+          </div>
+          <a class="side-card side-card-slots" href="#slots">
+            <div><strong>Slots</strong><span class="tag-high">🔥 EM ALTA</span></div>
+            <img class="animate-img" src="assets/images/main-categories-slots.gif" alt="Slots">
+          </a>
+        </div>
+
+        <a class="promo-card" href="#promos">
+          <span>Promoções<br>exclusivas</span>
+          <img class="promo-closed" src="assets/images/promotion-closed.png" alt="Promoção fechada">
+          <img class="promo-opened" src="assets/images/promotion-opened.png" alt="Promoção aberta">
+        </a>
+        <a class="sidebar-link" href="#faq"><img class="faq-img" src="assets/icons/faq.png" alt="FAQ"> Perguntas Frequentes <span class="external">↗</span></a>
+        <a class="sidebar-link" href="#support"><img class="support-img" src="assets/icons/support.png" alt="Suporte"> Suporte <span class="external">↗</span></a>
+
+        <div class="socials" aria-label="Redes sociais">
+          <span>◎</span><span>f</span><span>▶</span>
+        </div>
+      </div>
+    </aside>
+
+<div class="page">
 
 <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
 
-<header class="site-header" style="box-shadow:{{ hdrShadow }}">
-  <div class="site-header__row">
-    <a href="#topo" aria-label="Dr. Bingo, início" class="site-header__brand"><img src="assets/logo.png" alt="Dr. Bingo" width="134" height="23" class="brand-logo"></a>
-    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-      <nav aria-label="Navegação principal" class="site-nav">
-        <a href="#jogos" class="site-nav__link">Jogos de bingo</a>
-        <a href="#como-comecar" class="site-nav__link">Como começar</a>
-        <a href="#faq" class="site-nav__link">Perguntas frequentes</a>
-      </nav>
-      <div class="site-header__cta-group">
-        <a href="{{ links.login }}" data-cta="header_entrar" onClick="{{ onCta }}" class="header-login-link">Entrar</a>
-        <a href="{{ links.signup }}" data-cta="header_criar_conta" onClick="{{ onCta }}" class="btn-primary btn-primary--sm">Criar minha conta</a>
-      </div>
-    </sc-if>
-    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-      <div class="site-header__cta-group--mobile">
-        <a href="{{ links.signup }}" data-cta="header_criar_conta_mobile" onClick="{{ onCta }}" class="btn-primary btn-primary--mobile">Criar conta</a>
-        <button type="button" aria-expanded="{{ menuOpenStr }}" aria-controls="menu-mobile" aria-label="Abrir menu" onClick="{{ toggleMenu }}" class="burger-btn">
-          <span class="burger-bar"></span>
-          <span class="burger-bar burger-bar--accent"></span>
-          <span class="burger-bar"></span>
-        </button>
-      </div>
-    </sc-if>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo topbar-logo"><img src="assets/images/drbingo-logo.png" alt="Dr. Bingo Bet"></div>
+    <label class="search header-search" aria-label="Buscar jogos">
+      <input class="js-search-input" type="search" id="searchInput" placeholder="Buscar por jogo ou provedora" />
+      <img src="assets/icons/search.svg" alt="Icone busca">
+    </label>
+    <div class="auth">
+      <button class="btn btn-login" type="button" data-cta="header_entrar" data-href="{{ links.login }}" onClick="{{ onAuthBtn }}">Entrar</button>
+      <button class="btn btn-register" type="button" data-cta="header_criar_conta" data-href="{{ links.signup }}" onClick="{{ onAuthBtn }}">Criar conta</button>
+    </div>
   </div>
-  <sc-if value="{{ showMobileMenu }}" hint-placeholder-val="{{ false }}">
-    <nav id="menu-mobile" aria-label="Menu" class="mobile-nav">
-      <a href="#jogos" onClick="{{ closeMenu }}" class="mobile-nav__link">Jogos de bingo</a>
-      <a href="#como-comecar" onClick="{{ closeMenu }}" class="mobile-nav__link">Como começar</a>
-      <a href="#faq" onClick="{{ closeMenu }}" class="mobile-nav__link">Perguntas frequentes</a>
-      <a href="{{ links.login }}" data-cta="menu_entrar" onClick="{{ onCta }}" class="mobile-nav__login">Entrar</a>
-    </nav>
-  </sc-if>
 </header>
 
 <main id="conteudo">
@@ -67,11 +101,11 @@
   <div class="hero__content">
     <sc-if value="{{ showRealMoney }}" hint-placeholder-val="{{ true }}">
       <div class="hero__badges">
-        <span class="hero__badge"><span class="hero__badge-dot"></span>A casa n0 1 do Bingo</span>
+        <span class="hero__badge"><span class="hero__badge-dot"></span>O destino no. 1 do Bingo</span>
       </div>
     </sc-if>
     <h1 id="h1" class="hero__title">Jogue bingo online no <span style="color:#36FF00">Dr.&nbsp;Bingo Bet</span></h1>
-    <p class="hero__subtitle">Conheça nossos jogos de bingo exclusivos. Faça seu cadastro e divirta-se na casa número 1 de bingo do Brasil!</p>
+    <p class="hero__subtitle">Conheça nossos jogos de bingo exclusivos. Faça seu cadastro e divirta-se no destino no.1 de bingo no Brasil!</p>
     <div class="hero__actions">
       <a href="{{ links.signup }}" data-cta="hero_cadastrar_jogar" onClick="{{ onCta }}" class="btn-primary btn-primary--lg cta-glow--delayed">Criar minha conta <span aria-hidden="true" class="btn-arrow btn-arrow--lg">▶</span></a>
     </div>
@@ -97,7 +131,6 @@
 
 <section id="jogos" data-screen-label="Galeria de jogos" aria-labelledby="h-jogos" class="games">
   <div data-reveal="" class="games__intro">
-    <span class="eyebrow">Seleção de jogos</span>
     <h2 id="h-jogos" class="section-title">Escolha seu jogo de bingo</h2>
     <p class="games__note">Saiba mais sobre cada jogo!</p>
   </div>
@@ -114,7 +147,6 @@
           <h3 ref="{{ selNameRef }}" class="game-feature__title">{{ sel.name }}</h3>
           <p class="game-feature__desc">{{ sel.desc }}</p>
         </div>
-        <!-- <a href="{{ sel.href }}" data-cta="{{ sel.ctaId }}" onClick="{{ onCta }}" aria-label="{{ sel.ctaLabel }}" class="btn-primary btn-primary--md">{{ cardCta }}</a> -->
       </div>
     </article>
 
@@ -163,7 +195,6 @@
   <canvas ref="{{ confettiRef }}" aria-hidden="true" class="draw__confetti"></canvas>
   <div class="draw__inner">
     <div data-reveal="" class="draw__intro">
-      <span class="eyebrow">Sorteio</span>
       <h2 id="h-sorteio" class="section-title">O universo do bingo</h2>
       <p class="draw__note">Puxe a alavanca, acompanhe as bolas e tente completar uma linha da cartela!</p>
     </div>
@@ -249,34 +280,44 @@
 
 </main>
 
-<footer data-screen-label="Rodapé" class="site-footer">
-  <div class="site-footer__inner">
-    <div class="site-footer__top">
-      <img src="assets/logo.png" alt="Dr. Bingo" width="134" height="23" class="brand-logo">
-      <nav aria-label="Links institucionais" class="site-footer__nav">
-        <a href="{{ links.terms }}" class="site-footer__link">Termos e condições</a>
-        <a href="{{ links.privacy }}" class="site-footer__link">Política de privacidade</a>
-        <a href="{{ links.support }}" class="site-footer__link">Suporte</a>
-        <a href="{{ links.responsible }}" class="site-footer__link">Jogo responsável</a>
-      </nav>
+<div class="footer-wrap" data-screen-label="Rodapé">
+  <footer>
+    <div class="logo footer-logo"><img src="assets/images/drbingo-logo.png" alt="Dr. Bingo Bet"></div>
+    <div class="footer-grid">
+      <div>
+        <h4>Métodos de Pagamento</h4>
+        <div class="pix"><span class="pix-icon"></span><span>pix</span></div>
+        <h4>Siga nossas redes sociais</h4>
+        <div class="footer-socials"><span class="circle">f</span><span class="circle">◎</span><span class="circle">▶</span></div>
+      </div>
+      <div>
+        <h4>Informações adicionais</h4>
+        <ul>
+          <li>Termos e condições</li><li>PLD/FT</li><li>Política de KYC</li><li>Jogo Responsável</li><li>Resolução de Disputas</li><li>Jogo Justo e RNG</li><li>Política de Cookies e Privacidade</li><li>Portal de Atendimento a Autoridades Policiais</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ajuda</h4>
+        <ul>
+          <li>Perguntas Frequentes</li><li>Como Jogar</li><li>Política de Pagamento</li><li>Saque Responsável</li><li>Limites da Conta</li><li>Ferramentas da Conta</li><li>Autenticação Centralizada KYC</li><li>Contato</li>
+        </ul>
+      </div>
     </div>
-    <div class="site-footer__legal">
-      <span class="site-footer__age-badge">18+</span>
-      <p class="site-footer__legal-text">Proibido para menores de 18 anos. Jogue com responsabilidade. [Inserir aqui os avisos legais, dados da empresa e informações regulatórias aprovados pela Dr. Bingo.]</p>
-    </div>
-    <p class="site-footer__copyright">© Dr. Bingo. Todos os direitos reservados.</p>
+    <div class="badges"><div class="badge">GOVERNO<br>FEDERAL</div><div class="badge">18+</div><div class="badge">JA</div><div class="badge">Verificado<br>Responsável</div></div>
+    <p class="footer-text">Este site é operado por TRACK GAMING BRASIL LTDA com CNPJ fictício. Este layout é uma recriação visual para fins de estudo de interface. O jogo envolve risco e deve ser praticado com responsabilidade por maiores de 18 anos.</p>
+  </footer>
+</div>
   </div>
-</footer>
-
-<sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
-  <div class="sticky-cta">
-    <a href="{{ links.signup }}" data-cta="sticky_cadastrar_jogar" onClick="{{ onCta }}" class="btn-primary btn-primary--sticky">Criar minha conta</a>
-  </div>
-</sc-if>
-
+  <nav class="mobile-bottom-nav" aria-label="Navegação principal mobile">
+    <a href="#top"><span>⌂</span>Home</a>
+    <a href="#bingo"><span>●</span>Bingo</a>
+    <a href="#live"><span>▣</span>Ao Vivo</a>
+    <a href="#slots"><span>◆</span>Slots</a>
+    <a href="#crash"><span>↗</span>Crash</a>
+  </nav>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;cardCta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Criar minha conta&quot;,&quot;Jogar agora&quot;,&quot;Ver jogo&quot;],&quot;default&quot;:&quot;Criar minha conta&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Galeria&quot;},&quot;showRealMoney&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo a aprovar&quot;},&quot;showGameCount&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo a aprovar&quot;},&quot;animateDraw&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Experiência&quot;},&quot;mobileSticky&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Experiência&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;cardCta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Criar minha conta&quot;,&quot;Jogar agora&quot;,&quot;Ver jogo&quot;],&quot;default&quot;:&quot;Criar minha conta&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Galeria&quot;},&quot;showRealMoney&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo a aprovar&quot;},&quot;showGameCount&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo a aprovar&quot;},&quot;animateDraw&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Experiência&quot;}}">
 const GAME_NAMES = ["Pachinko","90's Turbo","American Champion","Fun Bingo","NineBalls","Pharao's","ShowBall3","Silver Ball","Super Bonus","SuperGoal"];
 const GAME_THUMBS = [null,"assets/thumbs/90sturbo.png","assets/thumbs/american-champion.png","assets/thumbs/fun-bingo.png","assets/thumbs/nineballs.png","assets/thumbs/pharaos.png","assets/thumbs/showball3.png","assets/thumbs/silverball.png","assets/thumbs/superbonus.png","assets/thumbs/thumb-super-goal.png"];
 const GAME_VIDEOS = ["assets/thumbs/pachinko3_1.mp4",null,null,null,null,null,null,null,null,null];
@@ -338,7 +379,7 @@ const globeStart = (i) => { const a = (i / GLOBE_SIZE) * Math.PI * 2, r = i % 2 
 
 class Component extends DCLogic {
   countRef = React.createRef(); featRef = React.createRef(); selNameRef = React.createRef(); globeRef = React.createRef(); drawRef = React.createRef(); cardRef = React.createRef(); confettiRef = React.createRef();
-  state = { y: 0, count: 10, faqOpen: {}, w: typeof window !== "undefined" ? window.innerWidth : 1280, menuOpen: false, scrolled: false, sel: 0, ...newGame(), drawKey: 0, leverDown: false, drawBusy: false };
+  state = { y: 0, count: 10, faqOpen: {}, w: typeof window !== "undefined" ? window.innerWidth : 1280, scrolled: false, sel: 0, ...newGame(), drawKey: 0, leverDown: false, drawBusy: false };
   balls = Array.from({ length: GLOBE_SIZE }, (_, i) => ({ ...globeStart(i), vx: 0, vy: 0, rot: 0, exit: null, alpha: 1 }));
   ballEls = [];
   ballRefs = Array.from({ length: GLOBE_SIZE }, (_, i) => (el) => { this.ballEls[i] = el; });
@@ -346,7 +387,7 @@ class Component extends DCLogic {
   drawTimers = [];
 
   componentDidMount() {
-    this.onResize = () => this.setState({ w: window.innerWidth, menuOpen: window.innerWidth >= 1040 ? false : this.state.menuOpen });
+    this.onResize = () => this.setState({ w: window.innerWidth });
     this.onScroll = () => { const s = window.scrollY > 560, t = window.scrollY > 8; if (s !== this.state.scrolled || t !== this.state.y) this.setState({ scrolled: s, y: t }); };
     window.addEventListener("resize", this.onResize);
     window.addEventListener("scroll", this.onScroll, { passive: true });
@@ -652,12 +693,24 @@ class Component extends DCLogic {
         }, "?");
     return {
       isMobile, isDesktop: !isMobile,
-      menuOpenStr: this.state.menuOpen ? "true" : "false",
-      showMobileMenu: isMobile && this.state.menuOpen,
-      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
-      closeMenu: () => this.setState({ menuOpen: false }),
+      openSidebar: () => {
+        const b = document.body;
+        if (window.matchMedia("(max-width: 980px)").matches) b.classList.toggle("sidebar-open");
+        else b.classList.toggle("sidebar-collapsed");
+      },
+      toggleSidebar: () => {
+        const b = document.body;
+        if (window.matchMedia("(max-width: 980px)").matches) b.classList.remove("sidebar-open");
+        else b.classList.toggle("sidebar-collapsed");
+      },
+      closeSidebar: () => document.body.classList.remove("sidebar-open"),
+      onSidebarClick: (e) => { if (e.target.closest("a")) document.body.classList.remove("sidebar-open"); },
+      onAuthBtn: (e) => {
+        const t = e.currentTarget;
+        (window.dataLayer = window.dataLayer || []).push({ event: "cta_click", cta_id: t.getAttribute("data-cta") });
+        window.location.href = t.getAttribute("data-href");
+      },
       countRef: this.countRef, featRef: this.featRef, selNameRef: this.selNameRef, countVal: this.state.count, videoRef: this.videoRef,
-      hdrShadow: this.state.y ? "0 10px 30px rgba(0,0,0,0.45)" : "none",
       links, games, sel, steps, faqs, cardCta,
       showRealMoney: p.showRealMoney ?? true,
       showGameCount: p.showGameCount ?? true,
@@ -669,12 +722,9 @@ class Component extends DCLogic {
       drawRef: this.drawRef, cardRef: this.cardRef, confettiRef: this.confettiRef,
       cardWon: this.state.won ? "true" : "false",
       drawnCount: this.state.drawnNums.length === 1 ? "1 bola" : this.state.drawnNums.length + " bolas",
-      showSticky: (p.mobileSticky ?? true) && isMobile && this.state.scrolled && !this.state.menuOpen,
-      pagePadBottom: (p.mobileSticky ?? true) && isMobile ? "76px" : "0px",
       onCta: (e) => {
         const id = e.currentTarget.getAttribute("data-cta");
         (window.dataLayer = window.dataLayer || []).push({ event: "cta_click", cta_id: id });
-        if (this.state.menuOpen) this.setState({ menuOpen: false });
       }
     };
   }
