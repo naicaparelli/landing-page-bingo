@@ -124,26 +124,16 @@
     <p class="games__note">Saiba mais sobre cada jogo!</p>
   </div>
 
-  <div class="games__grid">
-    <article data-reveal="" aria-live="polite" class="game-feature">
-      <div ref="{{ featRef }}" role="img" aria-label="{{ sel.artAlt }}" class="game-feature__media" style="{{ sel.mediaStyle }}">
-        <sc-if value="{{ sel.hasVideo }}" hint-placeholder-val="{{ false }}">
-          <video ref="{{ videoRef }}" class="feature-video" src="{{ sel.video }}" autoplay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" aria-hidden="true"></video>
-        </sc-if>
-      </div>
-      <div class="game-feature__body">
-        <div class="game-feature__text">
-          <h3 ref="{{ selNameRef }}" class="game-feature__title">{{ sel.name }}</h3>
-          <p class="game-feature__desc">{{ sel.desc }}</p>
-        </div>
-      </div>
-    </article>
-
-    <ul aria-label="Jogos da coleção" class="game-list">
+  <div data-reveal="" data-reveal-delay="120" class="game-carousel">
+    <div class="game-carousel__nav">
+      <button type="button" aria-label="Jogos anteriores" disabled="{{ gAtStart }}" onClick="{{ gamesPrev }}" class="game-carousel__btn">‹</button>
+      <button type="button" aria-label="Próximos jogos" disabled="{{ gAtEnd }}" onClick="{{ gamesNext }}" class="game-carousel__btn">›</button>
+    </div>
+    <ul ref="{{ gamesRef }}" onScroll="{{ onGamesScroll }}" aria-label="Jogos da coleção" class="game-list" style="--g-count:{{ gCount }};--g-cols:{{ gCols }}">
       <sc-for list="{{ games }}" as="g" hint-placeholder-count="10">
-        <li data-reveal="" data-reveal-delay="{{ g.delay }}">
-          <button type="button" aria-pressed="{{ g.pressed }}" aria-label="{{ g.selectLabel }}" onClick="{{ g.select }}" class="game-tile">
-            <span class="game-tile__art" style="opacity:{{ g.dim }}">
+        <li>
+          <a href="{{ g.href }}" data-cta="{{ g.ctaId }}" aria-label="{{ g.ctaLabel }}" onClick="{{ onCta }}" class="game-tile">
+            <span class="game-tile__art">
               <sc-if value="{{ g.hasVideo }}" hint-placeholder-val="{{ false }}">
                 <video ref="{{ videoRef }}" class="tile-video" src="{{ g.video }}" autoplay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" aria-hidden="true"></video>
               </sc-if>
@@ -151,11 +141,11 @@
                 <span class="tile-bg" style="background:{{ g.art }}"></span>
               </sc-if>
             </span>
-            <span class="game-tile__meta" style="border-top-color:{{ g.bar }}">
+            <span class="game-tile__meta">
               <span class="game-tile__name">{{ g.name }}</span>
               <span class="game-tile__index">{{ g.idx }}</span>
             </span>
-          </button>
+          </a>
         </li>
       </sc-for>
     </ul>
@@ -267,16 +257,18 @@ const STRIPES = "repeating-linear-gradient(135deg,rgba(255,255,255,0.06) 0 10px,
 
 
 class Component extends DCLogic {
-  featRef = React.createRef(); selNameRef = React.createRef();
-  state = { y: 0, faqOpen: {}, w: typeof window !== "undefined" ? window.innerWidth : 1280, scrolled: false, sel: 0 };
+  gamesRef = React.createRef();
+  state = { y: 0, faqOpen: {}, w: typeof window !== "undefined" ? window.innerWidth : 1280, scrolled: false, gAtStart: true, gAtEnd: false };
 
   componentDidMount() {
     this.onResize = () => this.setState({ w: window.innerWidth });
     this.onScroll = () => { const s = window.scrollY > 560, t = window.scrollY > 8; if (s !== this.state.scrolled || t !== this.state.y) this.setState({ scrolled: s, y: t }); };
     window.addEventListener("resize", this.onResize);
+    window.addEventListener("resize", this.onGamesScroll);
     window.addEventListener("scroll", this.onScroll, { passive: true });
     this.mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (!this.mq.matches) this.setupReveal();
+    this.onGamesScroll();
   }
   setupReveal() {
     const vh = window.innerHeight;
@@ -294,10 +286,21 @@ class Component extends DCLogic {
       el.style.opacity = "0"; this.io.observe(el);
     });
   }
-  pop(ref, kf, ms) { const el = ref.current; if (el && !(this.mq && this.mq.matches)) el.animate(kf, { duration: ms, easing: "cubic-bezier(.2,1.2,.3,1)" }); }
+  // Carousel arrows: page by ~80% of the visible width, and disable an arrow at either end
+  scrollGames(dir) {
+    const el = this.gamesRef.current;
+    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: this.mq && this.mq.matches ? "auto" : "smooth" });
+  }
+  onGamesScroll = () => {
+    const el = this.gamesRef.current;
+    if (!el) return;
+    const s = el.scrollLeft <= 2, e = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    if (s !== this.state.gAtStart || e !== this.state.gAtEnd) this.setState({ gAtStart: s, gAtEnd: e });
+  };
   videoRef = (el) => { if (!el) return; el.muted = true; el.defaultMuted = true; el.loop = true; el.playsInline = true; const p = el.play(); if (p && p.catch) p.catch(() => {}); };
   componentWillUnmount() {
     window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("resize", this.onGamesScroll);
     window.removeEventListener("scroll", this.onScroll);
     if (this.io) this.io.disconnect();
     cancelAnimationFrame(this.raf);
@@ -312,32 +315,21 @@ class Component extends DCLogic {
       support: "#link-suporte", responsible: "#link-jogo-responsavel", deposit: "#link-deposito", social: "#link-jogo-social"
     };
     const games = GAME_NAMES.map((name, i) => {
-      const on = this.state.sel === i;
       const thumb = GAME_THUMBS[i];
       const video = GAME_VIDEOS[i];
       const art = thumb ? `center/cover no-repeat url(${thumb})` : STRIPES + `linear-gradient(200deg,oklch(0.58 0.2 ${HUES[i]}) 0%,oklch(0.22 0.08 ${HUES[i]}) 100%)`;
       return {
         name,
         idx: String(i + 1).padStart(2, "0"),
-        desc: GAME_DESCS[i] || "Descrição breve a confirmar com a equipe.",
         art,
         video: video || "",
         hasVideo: !!video,
         hasImage: !video,
-        mediaStyle: video ? "" : "background:" + art,
-        artAlt: "Arte oficial do jogo " + name,
         href: links.signup,
         ctaId: "jogo_" + (i + 1),
         ctaLabel: cardCta + ": " + name,
-        selectLabel: "Selecionar " + name,
-        pressed: on ? "true" : "false",
-        bar: on ? "#36FF00" : "rgba(255,255,255,0.08)",
-        dim: on ? 1 : 0.72,
-        delay: (i % 5) * 60,
-        select: () => { if (this.state.sel === i) return; this.setState({ sel: i }); this.pop(this.featRef, [{ opacity: 0.2, transform: "scale(1.06)", filter: "brightness(1.6)" }, { opacity: 1, transform: "scale(1)", filter: "brightness(1)" }], 500); this.pop(this.selNameRef, [{ opacity: 0, transform: "translateX(-24px)" }, { opacity: 1, transform: "none" }], 450); }
       };
     });
-    const sel = games[this.state.sel];
     const steps = [
       { delay: 0, nn: "01", title: "Crie sua conta", color: "#36FF00" },
       { delay: 120, nn: "02", title: "Faça seu primeiro depósito", color: "#FF39DB" },
@@ -373,8 +365,10 @@ class Component extends DCLogic {
         (window.dataLayer = window.dataLayer || []).push({ event: "cta_click", cta_id: t.getAttribute("data-cta") });
         window.location.href = t.getAttribute("data-href");
       },
-      featRef: this.featRef, selNameRef: this.selNameRef, videoRef: this.videoRef,
-      links, games, sel, steps, faqs, cardCta,
+      gamesRef: this.gamesRef, onGamesScroll: this.onGamesScroll,
+      gamesPrev: () => this.scrollGames(-1), gamesNext: () => this.scrollGames(1),
+      gCount: games.length, gCols: Math.ceil(games.length / 2), gAtStart: this.state.gAtStart, gAtEnd: this.state.gAtEnd, videoRef: this.videoRef,
+      links, games, steps, faqs, cardCta,
       showRealMoney: p.showRealMoney ?? true,
       onCta: (e) => {
         const id = e.currentTarget.getAttribute("data-cta");

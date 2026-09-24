@@ -632,15 +632,15 @@
     }
 
     .footer-wrap {
-      max-width: 1110px;
+      max-width: var(--content-w);
       margin: 0 auto;
-      padding: 0 0 38px;
+      padding: 0 8px 38px;
     }
 
     footer {
       border-radius: 32px 32px 0 0;
       background: linear-gradient(180deg, #8b2ac0, #6f20a9 62%, #421568);
-      padding: 44px 58px 46px;
+      padding: 44px var(--pad-x) 46px;
       box-shadow: 0 -18px 50px rgba(0,0,0,.32), inset 0 1px rgba(255,255,255,.18);
       min-height: 410px;
     }
@@ -854,7 +854,6 @@
 
     @media (max-width: 1180px) {
       :root { --sidebar-w: 220px; --content-w: 900px; }
-      .footer-wrap { padding-left: 10px; padding-right: 10px; }
     }
 
     @media (max-width: 980px) {
@@ -991,7 +990,7 @@
       }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-grid { gap: 28px; }
-      footer { padding: 34px 26px; border-radius: 24px 24px 0 0; }
+      footer { padding: 34px var(--pad-x); border-radius: 24px 24px 0 0; }
     }
 
     @media (max-width: 620px) {
@@ -1012,6 +1011,7 @@
       }
       .topbar-inner .btn { flex: 0 1 132px; }
       main { padding: 14px 0px 0px 0px; }
+      .footer-wrap { padding-left: 0; padding-right: 0; }
       .footer-grid { margin-top: 20px; }
       .badges { flex-wrap: wrap; gap: 10px; }
       .footer-text { font-size: 12px; }
