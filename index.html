@@ -108,15 +108,13 @@
         <sc-if value="{{ sel.hasVideo }}" hint-placeholder-val="{{ false }}">
           <video ref="{{ videoRef }}" class="feature-video" src="{{ sel.video }}" autoplay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" aria-hidden="true"></video>
         </sc-if>
-        <span class="game-feature__index">{{ sel.idx }} / 10</span>
-        <span class="game-feature__tag">arte oficial · {{ sel.name }}</span>
       </div>
       <div class="game-feature__body">
         <div class="game-feature__text">
           <h3 ref="{{ selNameRef }}" class="game-feature__title">{{ sel.name }}</h3>
           <p class="game-feature__desc">{{ sel.desc }}</p>
         </div>
-        <a href="{{ sel.href }}" data-cta="{{ sel.ctaId }}" onClick="{{ onCta }}" aria-label="{{ sel.ctaLabel }}" class="btn-primary btn-primary--md">{{ cardCta }}</a>
+        <!-- <a href="{{ sel.href }}" data-cta="{{ sel.ctaId }}" onClick="{{ onCta }}" aria-label="{{ sel.ctaLabel }}" class="btn-primary btn-primary--md">{{ cardCta }}</a> -->
       </div>
     </article>
 
@@ -282,6 +280,18 @@
 const GAME_NAMES = ["Pachinko","90's Turbo","American Champion","Fun Bingo","NineBalls","Pharao's","ShowBall3","Silver Ball","Super Bonus","SuperGoal"];
 const GAME_THUMBS = [null,"assets/thumbs/90sturbo.png","assets/thumbs/american-champion.png","assets/thumbs/fun-bingo.png","assets/thumbs/nineballs.png","assets/thumbs/pharaos.png","assets/thumbs/showball3.png","assets/thumbs/silverball.png","assets/thumbs/superbonus.png","assets/thumbs/thumb-super-goal.png"];
 const GAME_VIDEOS = ["assets/thumbs/pachinko3_1.mp4",null,null,null,null,null,null,null,null,null];
+const GAME_DESCS = [
+  "Além dos prêmios por Linha, Linha Dupla, Perímetro e Bingo, você pode completar letras até formar a palavra PACHINKO e disputar o acumulado. O jogo tem 75 bolas, sorteia até 44 por rodada e oferece até 10 bolas extras e 12 prêmios possíveis por cartela.",
+  "Um bingo clássico de 4 cartelas, com prêmios por Linha, Linha Dupla, Perímetro e Bingo. Complete os cantos da cartela para ganhar um prêmio extra. Você também pode disputar o acumulado e contar com até 3 bolas extras.",
+  "Um clássico inspirado em Las Vegas, com cartelas de 5 linhas por 5 colunas. Além de Linha, diagonal e perímetro, há padrões como X e T. Cada rodada sorteia 50 bolas, com até 3 extras e chance de acumulado.",
+  null,
+  "Um bingo clássico e fácil de acompanhar, com 4 cartelas. Você pode ganhar com Linha, Linha Dupla e Bingo, além de disputar o acumulado. São 33 bolas no sorteio e até 9 bolas extras.",
+  "No clima do Egito Antigo, as cartelas têm formato de pirâmide. Complete 1, 2 ou 3 lados, ou a pirâmide inteira para fazer Bingo. O jogo também oferece acumulado e até 4 bolas extras.",
+  "Um bingo com várias formas de ganhar: além dos prêmios tradicionais, há padrões como triângulos, cruz e letra M. Você também pode disputar o acumulado ao completar a cartela em menos de 30 bolas.",
+  "Um bingo de 4 cartelas com visual futurista e bolas prateadas. Oferece prêmios por Linha, Linha Dupla e Bingo, além do acumulado. São 33 bolas no sorteio e até 9 bolas extras.",
+  null,
+  null
+];
 const HUES = [300, 265, 220, 190, 150, 110, 60, 25, 340, 240];
 const STRIPES = "repeating-linear-gradient(135deg,rgba(255,255,255,0.06) 0 10px,transparent 10px 20px),";
 const BALL_COLORS = ["#36FF00", "#FF39DB", "#FFB400", "#FFFFFF"];
@@ -576,7 +586,7 @@ class Component extends DCLogic {
       return {
         name,
         idx: String(i + 1).padStart(2, "0"),
-        desc: "Descrição breve a confirmar com a equipe.",
+        desc: GAME_DESCS[i] || "Descrição breve a confirmar com a equipe.",
         art,
         video: video || "",
         hasVideo: !!video,
