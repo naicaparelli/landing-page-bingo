@@ -92,6 +92,11 @@
 
 <main id="conteudo">
 
+<nav aria-label="Navegação da página" class="page-back">
+  <button type="button" aria-label="Voltar" onClick="{{ goBack }}" class="page-back__btn"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <span class="page-back__title">Bingo</span>
+</nav>
+
 <section id="topo" data-screen-label="Hero" aria-labelledby="h1" class="hero">
   <div aria-hidden="true" class="hero__grid-overlay"></div>
   <div role="img" aria-label="Personagem do Dr. Bingo comemorando com uma cartela de bingo cercado de bolas numeradas" class="hero__keyart">
@@ -142,9 +147,7 @@
               </sc-if>
             </span>
             <span class="game-tile__meta">
-              <span class="game-tile__name">{{ g.name }}</span>
-              <span class="game-tile__index">{{ g.idx }}</span>
-            </span>
+              <span class="game-tile__name">{{ g.name }}</span>            </span>
           </a>
         </li>
       </sc-for>
@@ -321,7 +324,6 @@ class Component extends DCLogic {
       const art = thumb ? `center/cover no-repeat url(${thumb})` : STRIPES + `linear-gradient(200deg,oklch(0.58 0.2 ${HUES[i]}) 0%,oklch(0.22 0.08 ${HUES[i]}) 100%)`;
       return {
         name,
-        idx: String(i + 1).padStart(2, "0"),
         art,
         video: video || "",
         hasVideo: !!video,
@@ -373,6 +375,7 @@ class Component extends DCLogic {
       gCount: games.length, gCols: Math.ceil(games.length / 2), gAtStart: this.state.gAtStart, gAtEnd: this.state.gAtEnd, videoRef: this.videoRef,
       links, games, faqs, cardCta, presets,
       amountText: amount ? fmt(amount) : "",
+      goBack: () => window.history.back(),
       onAmountChange: (e) => {
         const n = parseInt(e.target.value.replace(/\D/g, "").slice(0, 7), 10);
         this.setState({ amount: n || 0 });
