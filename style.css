@@ -124,6 +124,8 @@ details summary::-webkit-details-marker{display:none}
 .games__note{font-size:16px;line-height:1.5;color:#CFC2E3}
 /* Games carousel: one row on desktop (5 cards + a sliver), two rows on mobile (3 columns + a sliver) */
 .game-carousel{--g-gap:10px;--card-pad:clamp(16px,3vw,32px);display:flex;flex-direction:column;justify-content:flex-end;gap:12px;min-width:0;padding:var(--card-pad);border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:radial-gradient(900px 500px at 50% 0%,rgba(138,44,225,.28),transparent 70%),#1F0A35;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+/* Dr. Bingo scene (animation.js) bleeds to the card edges above the carousel */
+.game-carousel__scene{margin:calc(var(--card-pad) * -1) calc(var(--card-pad) * -1) 0}
 .game-carousel__nav{display:flex;justify-content:flex-end;gap:8px}
 .game-carousel__btn{width:40px;height:40px;display:grid;place-items:center;border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.06);color:#fff;font-size:26px;line-height:1;cursor:pointer;transition:background 150ms,opacity 150ms}
 .game-carousel__btn:hover:not(:disabled){background:rgba(54,255,0,0.15);border-color:#36FF00}

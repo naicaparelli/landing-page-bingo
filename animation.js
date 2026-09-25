@@ -18,6 +18,22 @@
   ];
 
   // Projective transform that maps the w×h rectangle onto the quad (Heckbert's square-to-quad, rescaled)
+  // Background sparkles: small seeded PRNG so the layout is the same on every mount
+  const SPARKS = 56;
+  function rand(seed) {
+    return function () {
+      seed = (seed * 1664525 + 1013904223) % 4294967296;
+      return seed / 4294967296;
+    };
+  }
+  // Coffee steam wisps: [x offset px, delay s, duration s, stroke px, path in a 70×190 box drawn bottom → top]
+  const WISPS = [
+    [-12, 0, 3.4, 7, "M35 190 C 15 160, 55 140, 35 110 S 12 60, 32 30 S 50 5, 40 -10"],
+    [10, -1.3, 4.1, 5, "M35 190 C 55 165, 18 140, 38 105 S 60 55, 34 25 S 20 0, 30 -12"],
+    [-2, -2.4, 3.8, 6, "M35 190 C 25 165, 50 150, 30 120 S 20 75, 40 45 S 45 10, 28 -8"]
+  ];
+  const SVGNS = "http://www.w3.org/2000/svg";
+
   function quadMatrix(w, h, q) {
     const [[x0, y0], [x1, y1], [x2, y2], [x3, y3]] = q;
     const dx1 = x1 - x2, dx2 = x3 - x2, dx3 = x0 - x1 + x2 - x3;
@@ -48,7 +64,21 @@
 
     const stage = node("div", "dr-scene__stage");
     stage.appendChild(img("01-cenario-vazio.png", "dr-scene__bg", 1672, 941));
+    const sparks = node("div", "dr-sparks");
+    const r = rand(7);
+    for (let i = 0; i < SPARKS; i++) {
+      const p = node("i", "dr-spark" + (r() < 0.35 ? " dr-spark--violet" : ""));
+      const size = 4 + r() * 8;
+      p.style.cssText = `left:${(r() * 100).toFixed(2)}%;top:${(4 + r() * 70).toFixed(2)}%;width:${size.toFixed(1)}px;height:${size.toFixed(1)}px;` +
+        `--dx:${(r() * 80 - 40).toFixed(0)}px;--dy:${(-40 - r() * 90).toFixed(0)}px;` +
+        `--dur:${(7 + r() * 9).toFixed(2)}s;--tw:${(1.6 + r() * 2.6).toFixed(2)}s;animation-delay:-${(r() * 16).toFixed(2)}s`;
+      sparks.appendChild(p);
+    }
+    stage.appendChild(sparks);
     stage.appendChild(img("lustre.png", "dr-lamp", 1024, 1536));
+    const lampGlow = node("div", "dr-lamp-glow");
+    lampGlow.append(node("i", "dr-lamp-glow__cone"), node("i", "dr-lamp-glow__halo"), node("i", "dr-lamp-glow__core"));
+    stage.appendChild(lampGlow);
 
     const tablet = node("div", "dr-tablet");
     tablet.appendChild(img("02-tablet-tela-limpa.png", "", 1672, 941));
@@ -84,6 +114,23 @@
     stage.appendChild(char);
     stage.appendChild(tablet); // after the character so the tablet sits in front of Dr. Bingo
     stage.appendChild(img("cafe.png", "dr-mug", 1374, 1145));
+    const steam = node("div", "dr-steam");
+    [0, -3].forEach((t) => {
+      const haze = node("i", "dr-steam__haze");
+      haze.style.animationDelay = t + "s";
+      steam.appendChild(haze);
+    });
+    WISPS.forEach(([x, t, dur, sw, d]) => {
+      const svg = document.createElementNS(SVGNS, "svg");
+      svg.setAttribute("class", "dr-steam__wisp");
+      svg.setAttribute("viewBox", "0 0 70 190");
+      svg.style.cssText = `left:${x}px;--dur:${dur}s;--sw:${sw}px;animation-delay:${t}s`;
+      const path = document.createElementNS(SVGNS, "path");
+      path.setAttribute("d", d);
+      svg.appendChild(path);
+      steam.appendChild(svg);
+    });
+    stage.appendChild(steam);
     root.appendChild(stage);
 
     const fit = () => {
