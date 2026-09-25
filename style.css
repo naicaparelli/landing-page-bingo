@@ -89,6 +89,17 @@ details summary::-webkit-details-marker{display:none}
 .hero__title{animation:fadeUp .8s cubic-bezier(.2,.8,.2,1) .15s both;font-family:'Luckiest Guy',Impact,sans-serif;font-weight:400;font-size:clamp(44px,6.8vw,100px);line-height:.98;letter-spacing:.01em;text-transform:uppercase;max-width:12ch;text-shadow:0 6px 40px rgba(19,5,30,0.8)}
 .hero__subtitle{animation:fadeUp .8s cubic-bezier(.2,.8,.2,1) .3s both;font-size:clamp(16px,1.5vw,19px);line-height:1.55;color:#E0D7EC;max-width:500px;text-wrap:pretty}
 .hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px;animation:fadeUp .8s cubic-bezier(.2,.8,.2,1) .45s both}
+@media (max-width:767px){
+  /* Stack: full key art on top, text below on a solid background */
+  .hero{flex-direction:column;align-items:stretch;max-height:none}
+  .hero__keyart{position:relative;top:auto;right:auto;bottom:auto;width:100%;min-width:0;aspect-ratio:16/9;background-position:center top;clip-path:none;-webkit-mask-image:linear-gradient(180deg,#000 75%,transparent 100%);mask-image:linear-gradient(180deg,#000 75%,transparent 100%)}
+  .hero__ball{display:none}
+  .hero__content{padding-top:8px;padding-bottom:clamp(32px,8vw,48px);gap:20px}
+  /* CTA spans the content width and scales down so it never overflows the gutter */
+  .hero__actions{align-self:stretch}
+  .hero__actions .btn-primary--lg{flex:1;min-width:0;justify-content:center;font-size:clamp(16px,4.8vw,20px);padding:18px clamp(14px,4vw,24px);gap:10px;letter-spacing:.04em;white-space:normal;text-align:center}
+  .hero__actions .btn-arrow--lg{font-size:.8em}
+}
 
 /* Diferencial: pink band holding the marquee */
 .diff{position:relative;background:#DE00FF;color:#fff;clip-path:polygon(0 0,100% 28px,100% 100%,0 calc(100% - 28px));margin-top:-28px;padding:24px 0;container-type:inline-size;--fade:clamp(40px,12%,180px);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%)}
