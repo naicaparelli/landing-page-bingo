@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cena Dr. Bingo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./animation.css">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;padding:16px;box-sizing:border-box;background:#13051E}
+  .demo{width:min(100%,1200px);border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<div class="demo"><div id="scene"></div></div>
+<script src="./animation.js"></script>
+<script>window.mountDrBingoScene(document.getElementById("scene"));</script>
+</body>
+</html>

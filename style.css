@@ -123,7 +123,7 @@ details summary::-webkit-details-marker{display:none}
 .games__intro{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
 .games__note{font-size:16px;line-height:1.5;color:#CFC2E3}
 /* Games carousel: one row on desktop (5 cards + a sliver), two rows on mobile (3 columns + a sliver) */
-.game-carousel{--g-gap:10px;--games-bg:url(assets/hero.png);--card-pad:clamp(16px,3vw,32px);display:flex;flex-direction:column;justify-content:flex-end;gap:12px;min-width:0;padding:var(--card-pad);padding-top:clamp(160px,24vw,320px);border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:linear-gradient(180deg,transparent 0%,rgba(19,5,30,.15) 35%,rgba(19,5,30,.85) 75%,rgba(19,5,30,.95) 100%),var(--games-bg) center top/cover no-repeat,#1F0A35;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.game-carousel{--g-gap:10px;--card-pad:clamp(16px,3vw,32px);display:flex;flex-direction:column;justify-content:flex-end;gap:12px;min-width:0;padding:var(--card-pad);border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:radial-gradient(900px 500px at 50% 0%,rgba(138,44,225,.28),transparent 70%),#1F0A35;box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .game-carousel__nav{display:flex;justify-content:flex-end;gap:8px}
 .game-carousel__btn{width:40px;height:40px;display:grid;place-items:center;border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.06);color:#fff;font-size:26px;line-height:1;cursor:pointer;transition:background 150ms,opacity 150ms}
 .game-carousel__btn:hover:not(:disabled){background:rgba(54,255,0,0.15);border-color:#36FF00}
@@ -170,6 +170,8 @@ details summary::-webkit-details-marker{display:none}
 .deposit-card__error{margin:-8px 0 0;font-size:14px;font-weight:500;color:#ff7a7a}
 
 /* FAQ */
+/* Videobingo band above the FAQ (scene styles in videobingo.css); the FAQ supplies the space below */
+.vb-band{padding:clamp(48px,7vw,96px) var(--pad-x) 0}
 .faq{margin:0 auto;padding:clamp(64px,9vw,120px) var(--pad-x);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,5vw,64px);align-items:start}
 .faq__list{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,0.12)}
 .faq__item{border-bottom:1px solid rgba(255,255,255,0.12)}

@@ -1,0 +1,82 @@
+/* Dr. Bingo scene (built by animation.js). The stage is laid out in the background's native px (1672×941)
+   and scaled to cover .dr-scene. Timed animations share one 6s loop:
+   0.35–1.1s  BINGO! letters pop in       1.45–4.3s  confetti falls inside the screen
+   1.56s      blink                       3.3–4.5s   eyebrows up
+   4.3–5.0s   screen content fades out    breathing: 3s, twice per loop */
+.dr-scene{--loop:6s;position:relative;overflow:hidden;aspect-ratio:1672/720;background:#1F0A35;isolation:isolate}
+.dr-scene::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(31,10,53,.35) 0%,transparent 18%,transparent 78%,#1F0A35 100%)}
+.dr-scene__stage{position:absolute;left:0;top:0;width:1672px;height:941px;transform-origin:0 0}
+.dr-scene__stage img{display:block;max-width:none;user-select:none;pointer-events:none}
+.dr-scene__bg{position:absolute;inset:0;width:1672px;height:941px}
+
+/* Tablet: full-canvas PNG (1672×941) scaled down, resting on the right of the table */
+.dr-tablet{position:absolute;left:748px;top:452px;width:1672px;height:941px;transform:scale(.5);transform-origin:0 0}
+.dr-tablet > img{position:absolute;inset:0;width:1672px;height:941px}
+/* HTML screen: a flat 1000×700 layer warped onto the screen's corners with matrix3d (set in animation.js) */
+.dr-screen{position:absolute;left:0;top:0;width:1000px;height:700px;transform-origin:0 0;overflow:hidden;border-radius:28px}
+.dr-screen__content{position:absolute;inset:0;animation:dr-screen-fade var(--loop) linear infinite}
+.dr-screen__word{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-bottom:20px;font-family:"Luckiest Guy",Impact,sans-serif;font-size:250px;line-height:1;letter-spacing:4px}
+.dr-letter{display:inline-block;opacity:0;padding-top:.12em;text-shadow:0 10px 0 rgba(20,0,40,.55),0 0 36px currentColor;animation:dr-letter var(--loop) linear infinite;animation-delay:calc(.35s + var(--i) * .15s)}
+.dr-letter--0,.dr-letter--4{color:#FFB400}
+.dr-letter--1{color:#FF39DB}
+.dr-letter--2{color:#36FF00}
+.dr-letter--3{color:#3ED5FF}
+.dr-letter--5{color:#fff}
+.dr-screen__confetti{position:absolute;inset:0}
+.dr-confetti{position:absolute;top:-40px;width:16px;height:30px;border-radius:3px;opacity:0;animation:dr-confetti var(--loop) linear infinite}
+.dr-confetti--round{width:22px;height:22px;border-radius:50%}
+.dr-confetti--c0{background:#FFB400}
+.dr-confetti--c1{background:#FF39DB}
+.dr-confetti--c2{background:#36FF00}
+.dr-confetti--c3{background:#3ED5FF}
+.dr-confetti--c4{background:#fff}
+
+/* Dr. Bingo: 1419×1109 canvas scaled down on the left; frames and patches share the canvas coordinates */
+.dr-char{position:absolute;left:78px;top:262px;width:1419px;height:1109px;transform:scale(.62);transform-origin:0 0}
+.dr-char__body{position:absolute;inset:0;transform-origin:50% 100%;animation:dr-breathe calc(var(--loop) / 2) ease-in-out infinite}
+.dr-char__body > img{position:absolute;left:0;top:0}
+.dr-char__brows{left:500px!important;top:270px!important;animation:dr-brows var(--loop) ease-in-out infinite}
+.dr-char__blink{opacity:0;clip-path:inset(368px 571px 583px 576px);animation:dr-blink var(--loop) linear infinite}
+
+.dr-scene.is-paused *{animation-play-state:paused!important}
+
+@keyframes dr-breathe{
+  0%,100%{transform:translateY(0) scale(1,1)}
+  50%{transform:translateY(-3px) scale(1.006,1.012)}
+}
+@keyframes dr-blink{
+  0%,25.9%{opacity:0}
+  26%,28.4%{opacity:1}
+  28.5%,100%{opacity:0}
+}
+@keyframes dr-brows{
+  0%,55%{transform:translateY(0)}
+  60%,70%{transform:translateY(-9px)}
+  75%,100%{transform:translateY(0)}
+}
+/* Phase is shifted per letter by its delay; letters hide at 78.5% (after the screen fade, before the next loop) so the next loop starts clean */
+@keyframes dr-letter{
+  0%{opacity:0;transform:translateY(30px) scale(.3)}
+  4%{opacity:1;transform:translateY(0) scale(1.22)}
+  7%{transform:scale(.94)}
+  10%,78.4%{opacity:1;transform:scale(1)}
+  78.5%,100%{opacity:0;transform:scale(1)}
+}
+@keyframes dr-confetti{
+  0%{opacity:1;transform:translate(0,0) rotate(0)}
+  34%{opacity:1;transform:translate(var(--dx),780px) rotate(var(--rot))}
+  34.1%,100%{opacity:0;transform:translate(var(--dx),780px) rotate(var(--rot))}
+}
+@keyframes dr-screen-fade{
+  0%,71.5%{opacity:1}
+  83%,100%{opacity:0}
+}
+
+@media (max-width:720px){
+  .dr-scene{aspect-ratio:3/2}
+}
+@media (prefers-reduced-motion:reduce){
+  .dr-scene *{animation:none!important}
+  .dr-letter{opacity:1}
+  .dr-confetti{display:none}
+}

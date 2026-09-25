@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./videobingo.js"></script>
 </head>
 <body>
 <x-dc>
@@ -16,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Luckiest+Guy&amp;family=Ubuntu:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="./layout.css">
+<link rel="stylesheet" href="./videobingo.css">
 </helmet>
 
 <div class="app-shell">
@@ -175,6 +177,10 @@
   </div>
 </section>
 
+<div data-screen-label="Videobingo" data-reveal="" class="vb-band">
+  <div ref="{{ vbRef }}" class="vb"></div>
+</div>
+
 <section id="faq" data-screen-label="FAQ" aria-labelledby="h-faq" class="faq">
   <h2 data-reveal="" id="h-faq" class="section-title section-title--faq">Perguntas frequentes</h2>
   <div class="faq__list">
@@ -304,6 +310,10 @@ class Component extends DCLogic {
     const s = el.scrollLeft <= 2, e = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
     if (s !== this.state.gAtStart || e !== this.state.gAtEnd) this.setState({ gAtStart: s, gAtEnd: e });
   };
+  vbRef = (el) => {
+    if (el && !this.vbStop && window.mountVideoBingo) this.vbStop = window.mountVideoBingo(el);
+    else if (!el && this.vbStop) { this.vbStop(); this.vbStop = null; }
+  };
   videoRef = (el) => { if (!el) return; el.muted = true; el.defaultMuted = true; el.loop = true; el.playsInline = true; const p = el.play(); if (p && p.catch) p.catch(() => {}); };
   componentWillUnmount() {
     window.removeEventListener("resize", this.onResize);
@@ -375,6 +385,7 @@ class Component extends DCLogic {
       },
       gamesRef: this.gamesRef, onGamesScroll: this.onGamesScroll,
       gamesPrev: () => this.scrollGames(-1), gamesNext: () => this.scrollGames(1),
+      vbRef: this.vbRef,
       gCount: games.length, gCols: Math.ceil(games.length / 2), gAtStart: this.state.gAtStart, gAtEnd: this.state.gAtEnd, videoRef: this.videoRef,
       links, games, faqs, cardCta, presets,
       amountText: amount ? fmt(amount) : "",
