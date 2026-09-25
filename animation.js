@@ -48,6 +48,7 @@
 
     const stage = node("div", "dr-scene__stage");
     stage.appendChild(img("01-cenario-vazio.png", "dr-scene__bg", 1672, 941));
+    stage.appendChild(img("lustre.png", "dr-lamp", 1024, 1536));
 
     const tablet = node("div", "dr-tablet");
     tablet.appendChild(img("02-tablet-tela-limpa.png", "", 1672, 941));
@@ -70,7 +71,6 @@
     content.append(word, confetti);
     screen.appendChild(content);
     tablet.appendChild(screen);
-    stage.appendChild(tablet);
 
     // Both character frames share one canvas (checked pixel by pixel: only the eyes differ), so the blink
     // overlay is clipped to the eyes and the eyebrow patch sits at its crop offset.
@@ -78,11 +78,12 @@
     const body = node("div", "dr-char__body");
     body.append(
       img("03-dr-bingo-olhos-abertos.png", "", 1419, 1109),
-      img("05-dr-bingo-sobrancelhas.png", "dr-char__brows", 360, 200),
       img("04-dr-bingo-piscando.png", "dr-char__blink", 1419, 1109)
     );
     char.appendChild(body);
     stage.appendChild(char);
+    stage.appendChild(tablet); // after the character so the tablet sits in front of Dr. Bingo
+    stage.appendChild(img("cafe.png", "dr-mug", 1374, 1145));
     root.appendChild(stage);
 
     const fit = () => {

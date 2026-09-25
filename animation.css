@@ -9,8 +9,12 @@
 .dr-scene__stage img{display:block;max-width:none;user-select:none;pointer-events:none}
 .dr-scene__bg{position:absolute;inset:0;width:1672px;height:941px}
 
+/* Props: pendant lamp hangs from the top edge between Dr. Bingo and the tablet; mug rests on the table in front */
+.dr-lamp{position:absolute;left:700px;top:0;width:350px;height:auto}
+.dr-mug{position:absolute;left:330px;top:760px;width:206px;height:172px}
+
 /* Tablet: full-canvas PNG (1672×941) scaled down, resting on the right of the table */
-.dr-tablet{position:absolute;left:748px;top:452px;width:1672px;height:941px;transform:scale(.5);transform-origin:0 0}
+.dr-tablet{position:absolute;left:748px;top:450px;width:1672px;height:941px;transform:scale(.5);transform-origin:0 0}
 .dr-tablet > img{position:absolute;inset:0;width:1672px;height:941px}
 /* HTML screen: a flat 1000×700 layer warped onto the screen's corners with matrix3d (set in animation.js) */
 .dr-screen{position:absolute;left:0;top:0;width:1000px;height:700px;transform-origin:0 0;overflow:hidden;border-radius:28px}
@@ -32,7 +36,7 @@
 .dr-confetti--c4{background:#fff}
 
 /* Dr. Bingo: 1419×1109 canvas scaled down on the left; frames and patches share the canvas coordinates */
-.dr-char{position:absolute;left:78px;top:262px;width:1419px;height:1109px;transform:scale(.62);transform-origin:0 0}
+.dr-char{position:absolute;top:150px;width:1419px;height:1109px;transform:scale(.62);transform-origin:0 0}
 .dr-char__body{position:absolute;inset:0;transform-origin:50% 100%;animation:dr-breathe calc(var(--loop) / 2) ease-in-out infinite}
 .dr-char__body > img{position:absolute;left:0;top:0}
 .dr-char__brows{left:500px!important;top:270px!important;animation:dr-brows var(--loop) ease-in-out infinite}
