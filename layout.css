@@ -625,6 +625,13 @@
       text-shadow: none;
     }
 
+    /* Header buttons use the landing page CTA font (see .btn-primary in style.css) */
+    .topbar .btn,
+    .mobile-nav .btn {
+      font-family: 'Ubuntu', system-ui, sans-serif;
+      font-weight: 700;
+    }
+
     .topbar .btn-register,
     .mobile-nav .btn-register {
       box-shadow: 0 6px 0 #0C5200, 0 12px 28px rgba(54,255,0,.25);

@@ -31,8 +31,16 @@ details summary::-webkit-details-marker{display:none}
 .brand-logo{display:block;height:23px;width:auto}
 .eyebrow{font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#FFB400}
 .section-title{font-family:'Luckiest Guy',Impact,sans-serif;font-weight:400;font-size:clamp(34px,4.6vw,62px);line-height:1;text-transform:uppercase}
-.section-title--narrow{max-width:12ch}
 .section-title--faq{max-width:9ch}
+
+/* Brand name in headings: "Dr." purple gradient, "Bingo" yellow-to-orange gradient, "Bet" white.
+   text-shadow would paint over a clipped gradient, so the shadow moves to a filter behind the glyphs. */
+.brand-name{text-shadow:none}
+.brand-name__dr,.brand-name__bingo{-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.brand-name__dr{background-image:linear-gradient(180deg,#e27bff 0%,#a93ff5 55%,#8126bd 100%)}
+.brand-name__bingo{background-image:linear-gradient(180deg,#ffe45c 0%,#ffb400 50%,#ff8b19 100%)}
+.brand-name__bet{color:#fff}
+.hero__title .brand-name{filter:drop-shadow(0 6px 20px rgba(19,5,30,0.8))}
 
 /* Primary CTA button */
 .btn-primary{font-family:'Ubuntu',system-ui,sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1;background:linear-gradient(90deg,#11d4a0 0%,#72d330 100%);color:#13051E;text-decoration:none;box-shadow:0 6px 0 #0C5200,0 12px 28px rgba(54,255,0,.25);white-space:nowrap;border-radius:8px;transition:transform 150ms,filter 150ms}
@@ -124,16 +132,23 @@ details summary::-webkit-details-marker{display:none}
 .game-tile__index{font-family:'Luckiest Guy',Impact,sans-serif;font-size:13px;color:#A696C0}
 
 /* Como começar */
-.steps{border-radius:24px; position:relative;background:#1F0A35;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
-.steps__inner{margin:0 auto;padding:clamp(64px,9vw,120px) var(--pad-x);display:flex;flex-direction:column;gap:40px}
-.steps__head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
-.steps__list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
-.step-card{transition:transform 260ms cubic-bezier(.2,1.4,.3,1),box-shadow 260ms;position:relative;overflow:hidden;min-height:220px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;background:linear-gradient(160deg,#2E1250 0%,#180830 100%);border:1px solid rgba(255,255,255,0.08);border-left-width:3px;border-left-style:solid}
-.step-card:hover{transform:translateY(-8px) rotate(-.6deg);box-shadow:0 20px 40px rgba(0,0,0,0.35)}
-.step-card__num{position:absolute;right:-6px;bottom:-30px;font-family:'Luckiest Guy',Impact,sans-serif;font-size:170px;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,0.10)}
-.step-card__label{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase}
-.step-card__dot{width:10px;height:10px;border-radius:50%;animation:blink 1.8s ease-in-out infinite}
-.step-card__title{position:relative;font-family:'Luckiest Guy',Impact,sans-serif;font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.05;text-transform:uppercase;max-width:12ch}
+.steps{--deposit-bg:url(assets/hero.png);border-radius:24px;overflow:hidden;position:relative;background:linear-gradient(90deg,rgba(19,5,30,.75) 0%,rgba(19,5,30,.25) 55%,transparent 100%),var(--deposit-bg) center/cover no-repeat,#1F0A35;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
+.steps__inner{margin:0 auto;padding:clamp(48px,7vw,96px) var(--pad-x);display:flex;align-items:center;min-height:clamp(420px,40vw,560px)}
+
+/* Card de depósito (glass) */
+.deposit-card{width:100%;max-width:420px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.12);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
+.deposit-card__label{font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.deposit-card__field{display:flex;align-items:center;gap:10px;padding:0 18px;min-height:64px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.16);border-radius:12px;transition:border-color 150ms,box-shadow 150ms}
+.deposit-card__field:focus-within{border-color:#72d330;box-shadow:0 0 0 3px rgba(114,211,48,.25)}
+.deposit-card__currency{font-weight:700;font-size:22px;color:rgba(255,255,255,.7)}
+.deposit-card__input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:700 clamp(26px,3vw,32px)/1 'Ubuntu',system-ui,sans-serif}
+.deposit-card__input::placeholder{color:rgba(255,255,255,.35)}
+.deposit-card__presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
+.deposit-card__preset{min-height:44px;padding:0 12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;color:#fff;font:700 15px/1 'Ubuntu',system-ui,sans-serif;cursor:pointer;transition:background 150ms,border-color 150ms,transform 150ms}
+.deposit-card__preset:hover{background:rgba(255,255,255,.18);transform:translateY(-1px)}
+.deposit-card__preset:focus-visible{outline:2px solid #72d330;outline-offset:2px}
+.deposit-card__preset[aria-pressed="true"]{background:rgba(114,211,48,.22);border-color:#72d330}
+.deposit-card__cta{text-align:center;margin-top:4px}
 
 /* FAQ */
 .faq{margin:0 auto;padding:clamp(64px,9vw,120px) var(--pad-x);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,5vw,64px);align-items:start}
