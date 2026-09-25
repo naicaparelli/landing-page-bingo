@@ -33,11 +33,12 @@ details summary::-webkit-details-marker{display:none}
 .section-title{font-family:'Luckiest Guy',Impact,sans-serif;font-weight:400;font-size:clamp(34px,4.6vw,62px);line-height:1;text-transform:uppercase}
 .section-title--faq{max-width:9ch}
 
-/* Brand name in headings: "Dr." purple gradient, "Bingo" yellow-to-orange gradient, "Bet" white.
+/* Brand name in headings: "Dr" purple gradient, "." CTA green, "Bingo" yellow-to-orange gradient, "Bet" white.
    text-shadow would paint over a clipped gradient, so the shadow moves to a filter behind the glyphs. */
 .brand-name{text-shadow:none}
-.brand-name__dr,.brand-name__bingo{-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.brand-name__dr,.brand-name__dot,.brand-name__bingo{-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .brand-name__dr{background-image:linear-gradient(180deg,#FF66FF 0%,#E006FF 100%)}
+.brand-name__dot{background-image:linear-gradient(90deg,#11d4a0 0%,#72d330 100%)}
 .brand-name__bingo{background-image:linear-gradient(180deg,#ffe45c 0%,#ffb400 50%,#ff8b19 100%)}
 .brand-name__bet{color:#fff}
 .hero__title .brand-name{filter:drop-shadow(0 6px 20px rgba(19,5,30,0.8))}
@@ -108,7 +109,7 @@ details summary::-webkit-details-marker{display:none}
 
 /* Games gallery */
 .games{margin:0 auto;padding:clamp(64px,9vw,64px) var(--pad-x)}
-.games__intro{display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
+.games__intro{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
 .games__note{font-size:16px;line-height:1.5;color:#CFC2E3}
 /* Games carousel: one row on desktop (5 cards + a sliver), two rows on mobile (3 columns + a sliver) */
 .game-carousel{--g-gap:10px;--games-bg:url(assets/hero.png);--card-pad:clamp(16px,3vw,32px);display:flex;flex-direction:column;justify-content:flex-end;gap:12px;min-width:0;padding:var(--card-pad);padding-top:clamp(160px,24vw,320px);border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:linear-gradient(180deg,transparent 0%,rgba(19,5,30,.15) 35%,rgba(19,5,30,.85) 75%,rgba(19,5,30,.95) 100%),var(--games-bg) center top/cover no-repeat,#1F0A35;box-shadow:0 20px 50px rgba(0,0,0,.35)}
@@ -137,7 +138,7 @@ details summary::-webkit-details-marker{display:none}
 .game-tile__meta{border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;gap:6px;padding:9px 10px}
 .game-tile__name{font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* Como começar */
-.steps{--deposit-bg:url(assets/hero.png);border-radius:24px;overflow:hidden;position:relative;background:linear-gradient(90deg,rgba(19,5,30,.75) 0%,rgba(19,5,30,.25) 55%,transparent 100%),var(--deposit-bg) center/cover no-repeat,#1F0A35;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
+.steps{--deposit-bg:url(assets/deposit.png);border-radius:24px;overflow:hidden;position:relative;background:linear-gradient(90deg,rgba(19,5,30,.75) 0%,rgba(19,5,30,.25) 55%,transparent 100%),var(--deposit-bg) center/cover no-repeat,#1F0A35;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
 .steps__inner{margin:0 auto;padding:clamp(48px,7vw,96px) var(--pad-x);display:flex;align-items:center;min-height:clamp(420px,40vw,560px)}
 
 /* Card de depósito (glass) */
@@ -146,7 +147,7 @@ details summary::-webkit-details-marker{display:none}
 .deposit-card__field{display:flex;align-items:center;gap:10px;padding:0 18px;min-height:64px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.16);border-radius:12px;transition:border-color 150ms,box-shadow 150ms}
 .deposit-card__field:focus-within{border-color:#72d330;box-shadow:0 0 0 3px rgba(114,211,48,.25)}
 .deposit-card__currency{font-weight:700;font-size:22px;color:rgba(255,255,255,.7)}
-.deposit-card__input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:700 clamp(26px,3vw,32px)/1 'Ubuntu',system-ui,sans-serif}
+.deposit-card__input{text-align:end;flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:700 clamp(26px,3vw,32px)/1 'Ubuntu',system-ui,sans-serif}
 .deposit-card__input::placeholder{color:rgba(255,255,255,.35)}
 .deposit-card__presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
 .deposit-card__preset{min-height:44px;padding:0 12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;color:#fff;font:700 15px/1 'Ubuntu',system-ui,sans-serif;cursor:pointer;transition:background 150ms,border-color 150ms,transform 150ms}
@@ -154,6 +155,8 @@ details summary::-webkit-details-marker{display:none}
 .deposit-card__preset:focus-visible{outline:2px solid #72d330;outline-offset:2px}
 .deposit-card__preset[aria-pressed="true"]{background:rgba(114,211,48,.22);border-color:#72d330}
 .deposit-card__cta{text-align:center;margin-top:4px}
+.deposit-card__field:has(.deposit-card__input[aria-invalid="true"]){border-color:#ff5a5a;box-shadow:0 0 0 3px rgba(255,90,90,.25)}
+.deposit-card__error{margin:-8px 0 0;font-size:14px;font-weight:500;color:#ff7a7a}
 
 /* FAQ */
 .faq{margin:0 auto;padding:clamp(64px,9vw,120px) var(--pad-x);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,5vw,64px);align-items:start}
@@ -168,6 +171,10 @@ details summary::-webkit-details-marker{display:none}
 
 /* CTA final */
 .cta-final{border-radius:24px;margin-bottom:40px;position:relative;overflow:hidden;background:radial-gradient(800px 400px at 50% 100%,rgba(138,44,225,0.5),transparent 70%),#180830;border-top:1px solid rgba(255,255,255,0.06)}
+@media (max-width:620px){
+  /* Card sections align with the --pad-x gutter used by .games and .faq */
+  .hero,.steps,.cta-final{margin-inline:var(--pad-x)}
+}
 .cta-final__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:56px 56px}
 .cta-final__content{position:relative;margin:0 auto;padding:clamp(80px,11vw,140px) var(--pad-x);display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
 .cta-final__title{font-family:'Luckiest Guy',Impact,sans-serif;font-weight:400;font-size:clamp(34px,5vw,68px);line-height:1;text-transform:uppercase;text-wrap:balance;max-width:18ch}

@@ -109,7 +109,7 @@
         <span class="hero__badge"><span class="hero__badge-dot"></span>O destino no. 1 do Bingo</span>
       </div>
     </sc-if>
-    <h1 id="h1" class="hero__title">Jogue bingo online no <span class="brand-name"><span class="brand-name__dr">Dr.</span>&nbsp;<span class="brand-name__bingo">Bingo</span> <span class="brand-name__bet">Bet</span></span></h1>
+    <h1 id="h1" class="hero__title">Jogue bingo online no <span class="brand-name"><span class="brand-name__dr">Dr</span><span class="brand-name__dot">.</span>&nbsp;<span class="brand-name__bingo">Bingo</span> <span class="brand-name__bet">Bet</span></span></h1>
     <p class="hero__subtitle">Conheça nossos jogos de bingo exclusivos. Faça seu cadastro e divirta-se no destino no.1 de bingo no Brasil!</p>
     <div class="hero__actions">
       <a href="{{ links.signup }}" data-cta="hero_cadastrar_jogar" onClick="{{ onCta }}" class="btn-primary btn-primary--lg cta-glow--delayed">Criar minha conta <span aria-hidden="true" class="btn-arrow btn-arrow--lg">▶</span></a>
@@ -126,7 +126,6 @@
 <section id="jogos" data-screen-label="Galeria de jogos" aria-labelledby="h-jogos" class="games">
   <div data-reveal="" class="games__intro">
     <h2 id="h-jogos" class="section-title">Escolha seu jogo de bingo</h2>
-    <p class="games__note">Saiba mais sobre cada jogo!</p>
   </div>
 
   <div data-reveal="" data-reveal-delay="120" class="game-carousel">
@@ -158,17 +157,20 @@
 <section id="como-comecar" data-screen-label="Como começar" aria-labelledby="h-comecar" class="steps">
   <div class="steps__inner">
     <div data-reveal="" class="deposit-card">
-      <label id="h-comecar" for="deposit-amount" class="deposit-card__label">Valor do depósito</label>
+      <label id="h-comecar" for="deposit-amount" class="deposit-card__label">Deposite e divirta-se!</label>
       <div class="deposit-card__field">
         <span aria-hidden="true" class="deposit-card__currency">R$</span>
-        <input id="deposit-amount" type="text" inputmode="numeric" autocomplete="off" placeholder="0" value="{{ amountText }}" onChange="{{ onAmountChange }}" class="deposit-card__input" />
+        <input id="deposit-amount" type="text" inputmode="numeric" autocomplete="off" placeholder="0" value="{{ amountText }}" onChange="{{ onAmountChange }}" aria-invalid="{{ amountError }}" aria-describedby="deposit-error" class="deposit-card__input" />
       </div>
+      <sc-if value="{{ amountError }}" hint-placeholder-val="{{ false }}">
+        <p id="deposit-error" role="alert" class="deposit-card__error">Digite quanto você quer depositar. Mínimo: R$10.</p>
+      </sc-if>
       <div role="group" aria-label="Valores sugeridos" class="deposit-card__presets">
-        <sc-for list="{{ presets }}" as="v" hint-placeholder-count="5">
+        <sc-for list="{{ presets }}" as="v" hint-placeholder-count="6">
           <button type="button" aria-pressed="{{ v.active }}" onClick="{{ v.onPick }}" class="deposit-card__preset">R$ {{ v.label }}</button>
         </sc-for>
       </div>
-      <a href="{{ links.deposit }}" data-cta="deposito_depositar" onClick="{{ onCta }}" class="btn-primary btn-primary--md deposit-card__cta">Depositar</a>
+      <a href="{{ links.deposit }}" data-cta="deposito_depositar" onClick="{{ onDeposit }}" class="btn-primary btn-primary--md deposit-card__cta">Depositar</a>
     </div>
   </div>
 </section>
@@ -194,7 +196,7 @@
 <section data-screen-label="CTA final" aria-labelledby="h-final" class="cta-final">
   <div aria-hidden="true" class="cta-final__grid"></div>
   <div data-reveal="" class="cta-final__content">
-    <h2 id="h-final" class="cta-final__title">Pronto para conhecer os jogos de bingo do <span class="brand-name"><span class="brand-name__dr">Dr.</span>&nbsp;<span class="brand-name__bingo">Bingo</span> <span class="brand-name__bet">Bet</span>?</span></h2>
+    <h2 id="h-final" class="cta-final__title">Pronto para conhecer os jogos de bingo do <span class="brand-name"><span class="brand-name__dr">Dr</span><span class="brand-name__dot">.</span>&nbsp;<span class="brand-name__bingo">Bingo</span> <span class="brand-name__bet">Bet</span>?</span></h2>
     <p class="cta-final__subtitle">Crie sua conta e explore os títulos disponíveis.</p>
     <a href="{{ links.signup }}" data-cta="final_cadastrar_jogar" onClick="{{ onCta }}" class="btn-primary btn-primary--xl cta-glow">Criar minha conta <span aria-hidden="true" class="btn-arrow btn-arrow--xl">▶</span></a>
   </div>
@@ -256,13 +258,14 @@ const GAME_DESCS = [
   null
 ];
 const HUES = [300, 265, 220, 190, 150, 110, 60, 25, 340, 240];
-const PRESET_AMOUNTS = [20, 50, 100, 200, 500];
+const PRESET_AMOUNTS = [10, 20, 50, 100, 200, 500];
+const MIN_DEPOSIT = 10;
 const STRIPES ="repeating-linear-gradient(135deg,rgba(255,255,255,0.06) 0 10px,transparent 10px 20px),";
 
 
 class Component extends DCLogic {
   gamesRef = React.createRef();
-  state = { y: 0, faqOpen: {}, amount: 0, w: typeof window !== "undefined" ? window.innerWidth : 1280, scrolled: false, gAtStart: true, gAtEnd: false };
+  state = { y: 0, faqOpen: {}, amount: PRESET_AMOUNTS[0], amountError: false, w: typeof window !== "undefined" ? window.innerWidth : 1280, scrolled: false, gAtStart: true, gAtEnd: false };
 
   componentDidMount() {
     this.onResize = () => this.setState({ w: window.innerWidth });
@@ -338,7 +341,7 @@ class Component extends DCLogic {
     const presets = PRESET_AMOUNTS.map(v => ({
       label: fmt(v),
       active: amount === v,
-      onPick: () => this.setState({ amount: v })
+      onPick: () => this.setState({ amount: v, amountError: false })
     }));
     const T = "[Resposta a validar pela equipe] ";
     const faqs = [
@@ -378,7 +381,17 @@ class Component extends DCLogic {
       goBack: () => window.history.back(),
       onAmountChange: (e) => {
         const n = parseInt(e.target.value.replace(/\D/g, "").slice(0, 7), 10);
-        this.setState({ amount: n || 0 });
+        this.setState({ amount: n || 0, amountError: false });
+      },
+      amountError: this.state.amountError,
+      onDeposit: (e) => {
+        if (amount < MIN_DEPOSIT) {
+          e.preventDefault();
+          this.setState({ amountError: true });
+          document.getElementById("deposit-amount")?.focus();
+          return;
+        }
+        (window.dataLayer = window.dataLayer || []).push({ event: "cta_click", cta_id: e.currentTarget.getAttribute("data-cta") });
       },
       showRealMoney: p.showRealMoney ?? true,
       onCta: (e) => {
