@@ -37,7 +37,7 @@ details summary::-webkit-details-marker{display:none}
    text-shadow would paint over a clipped gradient, so the shadow moves to a filter behind the glyphs. */
 .brand-name{text-shadow:none}
 .brand-name__dr,.brand-name__bingo{-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.brand-name__dr{background-image:linear-gradient(180deg,#e27bff 0%,#a93ff5 55%,#8126bd 100%)}
+.brand-name__dr{background-image:linear-gradient(180deg,#FF66FF 0%,#E006FF 100%)}
 .brand-name__bingo{background-image:linear-gradient(180deg,#ffe45c 0%,#ffb400 50%,#ff8b19 100%)}
 .brand-name__bet{color:#fff}
 .hero__title .brand-name{filter:drop-shadow(0 6px 20px rgba(19,5,30,0.8))}
